@@ -341,13 +341,6 @@ const VelmaAPI = {
     },
 
     /**
-     * Get health status
-     */
-    async health() {
-        return this.request('/health');
-    },
-
-    /**
      * Get configuration
      */
     async getConfig() {
@@ -463,25 +456,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize toast system
     VelmaToast.init();
 
-    // Check API health
-    VelmaAPI.health()
-        .then(data => {
-            console.log('Velma API Status:', data);
-            const statusBadge = document.getElementById('statusBadge');
-            if (statusBadge) {
-                statusBadge.textContent = 'Online';
-                statusBadge.className = 'badge badge-success';
-            }
-        })
-        .catch(error => {
-            console.error('Velma API offline:', error);
-            const statusBadge = document.getElementById('statusBadge');
-            if (statusBadge) {
-                statusBadge.textContent = 'Offline';
-                statusBadge.className = 'badge badge-error';
-            }
-            VelmaToast.warning('Unable to connect to Velma API. Some features may be limited.', 10000);
-        });
+    // Note: API health check removed - chat page handles status detection
+    // The chat.js updateStatusBadge() function properly detects API configuration
 });
 
 // Export for use in other scripts
