@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Settings - Velma NDIS">
+    <title>Settings - Velma NDIS</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/velma-core.css">
+    <link rel="stylesheet" href="/css/velma-components.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <div class="sidebar-logo-icon">V</div>
+                <span>Velma</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="sidebar-nav-section">
+                <h6 class="sidebar-nav-title">Main</h6>
+                <a href="index.html" class="sidebar-nav-item">
+                    <svg class="sidebar-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="chat.html" class="sidebar-nav-item">
+                    <svg class="sidebar-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                    </svg>
+                    AI Chat
+                </a>
+            </div>
+
+            <div class="sidebar-nav-section">
+                <h6 class="sidebar-nav-title">NDIS Modules</h6>
+                <a href="hr.html" class="sidebar-nav-item">
+                    <svg class="sidebar-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    HR & Compliance
+                </a>
+                <a href="payroll.html" class="sidebar-nav-item">
+                    <svg class="sidebar-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Payroll
+                </a>
+            </div>
+
+            <div class="sidebar-nav-section">
+                <h6 class="sidebar-nav-title">System</h6>
+                <a href="settings.html" class="sidebar-nav-item active">
+                    <svg class="sidebar-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    Settings
+                </a>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="topbar-user">
+                <div class="topbar-user-avatar">AD</div>
+                <div class="topbar-user-info">
+                    <div class="topbar-user-name">Admin User</div>
+                    <div class="topbar-user-role">Administrator</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Top Bar -->
+    <header class="topbar">
+        <button class="btn btn-ghost btn-icon" id="menuToggle" aria-label="Toggle menu">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+
+        <div style="flex: 1;">
+            <h2 style="margin: 0; font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); color: var(--color-gray-900);">
+                Settings
+            </h2>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Settings</h1>
+            <p class="page-subtitle">Configure Velma to work with your API keys and preferences</p>
+        </div>
+
+        <!-- Status Alert -->
+        <div id="statusAlert" style="display: none;"></div>
+
+        <div style="max-width: 800px;">
+            <!-- API Configuration -->
+            <div class="card" style="margin-bottom: var(--spacing-xl);">
+                <div class="card-header">
+                    <h3 class="card-title">AI Configuration</h3>
+                    <span class="badge" id="aiStatusBadge">Not Configured</span>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <strong>Enable Real AI Responses</strong><br>
+                        To use Velma with real AI (Claude), you need an Anthropic API key. Your key is stored securely in your browser and never sent to any server except Anthropic's API.
+                    </div>
+
+                    <form id="apiKeyForm">
+                        <div class="form-group">
+                            <label class="form-label">Anthropic API Key</label>
+                            <div style="display: flex; gap: var(--spacing-md);">
+                                <input
+                                    type="password"
+                                    id="apiKey"
+                                    class="form-control"
+                                    placeholder="sk-ant-api03-..."
+                                    style="flex: 1;"
+                                >
+                                <button type="button" class="btn btn-ghost btn-icon" id="toggleApiKey" title="Show/Hide">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="form-helper">
+                                Get your API key from <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">AI Model</label>
+                            <select id="aiModel" class="form-select">
+                                <option value="claude-sonnet-4-5-20250929" selected>Claude Sonnet 4.5 (Recommended)</option>
+                                <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option>
+                                <option value="claude-3-haiku-20240307">Claude 3 Haiku (Faster, Cheaper)</option>
+                            </select>
+                            <span class="form-helper">Choose the AI model to use for chat responses</span>
+                        </div>
+
+                        <div style="display: flex; gap: var(--spacing-md);">
+                            <button type="submit" class="btn btn-primary">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Save API Key
+                            </button>
+                            <button type="button" class="btn btn-outline" id="testApiKey" disabled>
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Test Connection
+                            </button>
+                            <button type="button" class="btn btn-ghost" id="clearApiKey" disabled>
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                                Clear
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Company Settings -->
+            <div class="card" style="margin-bottom: var(--spacing-xl);">
+                <div class="card-header">
+                    <h3 class="card-title">Company Information</h3>
+                </div>
+                <div class="card-body">
+                    <form id="companyForm">
+                        <div class="form-group">
+                            <label class="form-label">Company Name</label>
+                            <input type="text" id="companyName" class="form-control" placeholder="Your NDIS Company">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">ABN (Australian Business Number)</label>
+                            <input type="text" id="companyAbn" class="form-control" placeholder="12 345 678 901">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">NDIS Provider Number</label>
+                            <input type="text" id="ndisProvider" class="form-control" placeholder="4050000123">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Save Company Info
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Privacy & Data -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Privacy & Data</h3>
+                </div>
+                <div class="card-body">
+                    <div style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
+                        <div>
+                            <h4 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-xs);">Data Storage</h4>
+                            <p style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--spacing-md);">
+                                All settings and API keys are stored locally in your browser using localStorage.
+                                Nothing is sent to our servers. Your API key is only used to communicate directly with Anthropic's API.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-xs);">Clear All Data</h4>
+                            <p style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--spacing-md);">
+                                This will remove all stored data including API keys, chat history, and preferences.
+                            </p>
+                            <button class="btn btn-error" id="clearAllData">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                                Clear All Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/config.js"></script>
+    <script src="/js/velma-core.js"></script>
+    <script>
+        // Load settings on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSettings();
+            updateStatus();
+        });
+
+        // Toggle API key visibility
+        document.getElementById('toggleApiKey').addEventListener('click', function() {
+            const apiKeyInput = document.getElementById('apiKey');
+            apiKeyInput.type = apiKeyInput.type === 'password' ? 'text' : 'password';
+        });
+
+        // Save API key
+        document.getElementById('apiKeyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const aiModel = document.getElementById('aiModel').value;
+
+            if (!apiKey) {
+                VelmaToast.error('Please enter an API key');
+                return;
+            }
+
+            if (!apiKey.startsWith('sk-ant-')) {
+                VelmaToast.error('Invalid API key format. Should start with sk-ant-');
+                return;
+            }
+
+            // Save to localStorage
+            localStorage.setItem('velma_anthropic_api_key', apiKey);
+            localStorage.setItem('velma_ai_model', aiModel);
+
+            VelmaToast.success('API key saved successfully');
+            updateStatus();
+
+            // Enable test button
+            document.getElementById('testApiKey').disabled = false;
+            document.getElementById('clearApiKey').disabled = false;
+        });
+
+        // Test API key
+        document.getElementById('testApiKey').addEventListener('click', async function() {
+            const apiKey = localStorage.getItem('velma_anthropic_api_key');
+            const model = localStorage.getItem('velma_ai_model') || 'claude-sonnet-4-5-20250929';
+
+            if (!apiKey) {
+                VelmaToast.error('No API key found');
+                return;
+            }
+
+            const button = this;
+            button.disabled = true;
+            button.innerHTML = '<div class="spinner spinner-sm"></div> Testing...';
+
+            try {
+                const response = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': apiKey,
+                        'anthropic-version': '2023-06-01'
+                    },
+                    body: JSON.stringify({
+                        model: model,
+                        max_tokens: 50,
+                        messages: [{
+                            role: 'user',
+                            content: 'Say "API key working!" if you can read this.'
+                        }]
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    VelmaToast.success('✅ API key is working! Chat is ready to use.');
+                    showStatusAlert('success', 'API Connection Successful', 'Your API key is valid and ready to use. Go to the Chat page to start using real AI responses!');
+                } else {
+                    const error = await response.json();
+                    VelmaToast.error('API key test failed: ' + (error.error?.message || 'Invalid response'));
+                    showStatusAlert('error', 'API Connection Failed', error.error?.message || 'Please check your API key and try again.');
+                }
+            } catch (error) {
+                VelmaToast.error('Connection error: ' + error.message);
+                showStatusAlert('error', 'Connection Error', 'Could not connect to Anthropic API. Check your internet connection.');
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Test Connection';
+            }
+        });
+
+        // Clear API key
+        document.getElementById('clearApiKey').addEventListener('click', function() {
+            if (confirm('Are you sure you want to clear the API key?')) {
+                localStorage.removeItem('velma_anthropic_api_key');
+                localStorage.removeItem('velma_ai_model');
+                document.getElementById('apiKey').value = '';
+                document.getElementById('testApiKey').disabled = true;
+                document.getElementById('clearApiKey').disabled = true;
+                VelmaToast.success('API key cleared');
+                updateStatus();
+            }
+        });
+
+        // Save company info
+        document.getElementById('companyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const companyName = document.getElementById('companyName').value.trim();
+            const companyAbn = document.getElementById('companyAbn').value.trim();
+            const ndisProvider = document.getElementById('ndisProvider').value.trim();
+
+            localStorage.setItem('velma_company_name', companyName);
+            localStorage.setItem('velma_company_abn', companyAbn);
+            localStorage.setItem('velma_ndis_provider', ndisProvider);
+
+            VelmaToast.success('Company information saved');
+        });
+
+        // Clear all data
+        document.getElementById('clearAllData').addEventListener('click', function() {
+            if (confirm('⚠️ This will delete ALL stored data including API keys, chat history, and settings. Are you sure?')) {
+                if (confirm('This action cannot be undone. Continue?')) {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    VelmaToast.success('All data cleared');
+                    setTimeout(() => window.location.reload(), 1000);
+                }
+            }
+        });
+
+        // Load settings from localStorage
+        function loadSettings() {
+            const apiKey = localStorage.getItem('velma_anthropic_api_key');
+            const aiModel = localStorage.getItem('velma_ai_model');
+            const companyName = localStorage.getItem('velma_company_name');
+            const companyAbn = localStorage.getItem('velma_company_abn');
+            const ndisProvider = localStorage.getItem('velma_ndis_provider');
+
+            if (apiKey) {
+                document.getElementById('apiKey').value = apiKey;
+                document.getElementById('testApiKey').disabled = false;
+                document.getElementById('clearApiKey').disabled = false;
+            }
+
+            if (aiModel) {
+                document.getElementById('aiModel').value = aiModel;
+            }
+
+            if (companyName) {
+                document.getElementById('companyName').value = companyName;
+            }
+
+            if (companyAbn) {
+                document.getElementById('companyAbn').value = companyAbn;
+            }
+
+            if (ndisProvider) {
+                document.getElementById('ndisProvider').value = ndisProvider;
+            }
+        }
+
+        // Update status badge
+        function updateStatus() {
+            const apiKey = localStorage.getItem('velma_anthropic_api_key');
+            const badge = document.getElementById('aiStatusBadge');
+
+            if (apiKey) {
+                badge.textContent = 'Configured';
+                badge.className = 'badge badge-success';
+            } else {
+                badge.textContent = 'Not Configured';
+                badge.className = 'badge badge-gray';
+            }
+        }
+
+        // Show status alert
+        function showStatusAlert(type, title, message) {
+            const alertDiv = document.getElementById('statusAlert');
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
+
+            alertDiv.className = `alert ${alertClass}`;
+            alertDiv.innerHTML = `<strong>${title}</strong><br>${message}`;
+            alertDiv.style.display = 'block';
+            alertDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            setTimeout(() => {
+                alertDiv.style.display = 'none';
+            }, 10000);
+        }
+    </script>
+</body>
+</html>
