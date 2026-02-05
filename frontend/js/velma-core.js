@@ -3,10 +3,9 @@
  * Core utilities and shared functionality
  */
 
-// API Configuration
-const API_BASE_URL = window.location.hostname === 'localhost'
-    ? 'http://localhost:8000'
-    : '/api';
+// API Configuration (from config.js)
+const API_BASE_URL = window.VELMA_CONFIG?.API_BASE_URL || '/api';
+const DEMO_MODE = window.VELMA_CONFIG?.DEMO_MODE || false;
 
 // Utility Functions
 const VelmaUtils = {
@@ -190,6 +189,11 @@ const VelmaAPI = {
      * Send chat message
      */
     async chat(message, context = {}) {
+        // Demo mode - return simulated responses
+        if (DEMO_MODE) {
+            return this.getDemoResponse(message);
+        }
+
         return this.request('/api/chat', {
             method: 'POST',
             body: JSON.stringify({
@@ -198,6 +202,77 @@ const VelmaAPI = {
                 user_id: this.getUserId()
             })
         });
+    },
+
+    /**
+     * Get demo response (when backend is not available)
+     */
+    async getDemoResponse(message) {
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 700));
+
+        const messageLower = message.toLowerCase();
+
+        // SCHADS rates
+        if (messageLower.includes('schads') || messageLower.includes('award') || messageLower.includes('rate')) {
+            return {
+                status: 'success',
+                message: `**SCHADS Award 2010 - 2026 Rates**\n\n**Level 2 - Support Worker (Most Common):**\n- Level 2.1: $28.45/hour - Certificate II or 6 months experience\n- Level 2.2: $29.15/hour - Certificate III\n- Level 2.3: $29.85/hour - Certificate III + additional skills\n\n**Penalty Rates:**\n- Saturday: 1.5x (50% extra)\n- Sunday: 1.75x (75% extra)\n- Public Holiday: 2.5x (150% extra)\n- Night (8pm-7am): 1.25x\n- Afternoon (3pm-8pm): 1.15x\n\n**Note:** This is demo mode. Connect to the Velma API for real calculations.`,
+                action: 'respond'
+            };
+        }
+
+        // Compliance
+        if (messageLower.includes('compliance') || messageLower.includes('documents') || messageLower.includes('screening')) {
+            return {
+                status: 'success',
+                message: `**NDIS Worker Compliance Requirements**\n\nAll NDIS workers must maintain:\n\n1. **NDIS Worker Screening Check** (Yellow Card) - Valid 5 years\n2. **Working with Children Check** (WWCC) - Valid 5 years\n3. **First Aid Certificate** - Valid 3 years\n4. **CPR Certificate** - Valid 12 months\n5. **Police Check** - Valid 3 years\n6. **NDIS Worker Orientation Module** - One-time completion\n\nVelma automatically tracks expiry dates and sends reminders at 30, 60, and 90 days before expiration.\n\n**Note:** This is demo mode. Connect to the Velma API for actual compliance tracking.`,
+                action: 'respond'
+            };
+        }
+
+        // Calculate pay
+        if (messageLower.includes('calculate') || messageLower.includes('pay')) {
+            return {
+                status: 'success',
+                message: `**Pay Calculation Example**\n\nFor a Level 2.1 worker ($28.45/hour) working Saturday 9am-5pm (8 hours):\n\n- Base rate: $28.45/hour\n- Saturday penalty: 1.5x\n- Hourly rate: $28.45 × 1.5 = $42.68/hour\n- Total pay: $42.68 × 8 hours = **$341.44**\n\nThis includes:\n- Ordinary time earnings: $227.60\n- Saturday penalty: $113.84\n- Superannuation (11.5%): $26.17\n\n**Note:** This is demo mode. Connect to the Velma API for detailed calculations with all penalties and allowances.`,
+                action: 'respond'
+            };
+        }
+
+        // Onboarding
+        if (messageLower.includes('onboard') || messageLower.includes('new employee')) {
+            return {
+                status: 'success',
+                message: `**NDIS Employee Onboarding Checklist**\n\n**Pre-Employment:**\n- ✓ Job offer accepted\n- ✓ NDIS Worker Screening verified\n- ✓ WWCC verified\n- ✓ Police Check completed\n- ✓ First Aid & CPR certificates verified\n- ✓ Employment contract signed\n- ✓ TFN Declaration completed\n- ✓ Superannuation choice form\n\n**First Week:**\n- NDIS Worker Orientation Module\n- NDIS Code of Conduct training\n- Company policies review\n- IT systems access\n- Initial training\n\n**Note:** This is demo mode. Connect to the Velma API for automated onboarding management.`,
+                action: 'respond'
+            };
+        }
+
+        // Leave loading
+        if (messageLower.includes('leave loading') || messageLower.includes('annual leave')) {
+            return {
+                status: 'success',
+                message: `**Annual Leave Loading (SCHADS Award)**\n\nThe SCHADS Award provides **17.5% leave loading** on annual leave.\n\n**Example Calculation:**\nFor an employee on $30/hour:\n- 4 weeks annual leave = 152 hours\n- Normal pay: $30 × 152 = $4,560\n- Leave loading (17.5%): $4,560 × 0.175 = $798\n- **Total entitlement: $5,358**\n\nLeave loading compensates workers for not earning penalty rates while on leave.\n\n**Note:** This is demo mode. Connect to the Velma API for personalized calculations.`,
+                action: 'respond'
+            };
+        }
+
+        // Expiring credentials
+        if (messageLower.includes('expir') || messageLower.includes('credential')) {
+            return {
+                status: 'success',
+                message: `**Credential Expiry Monitoring**\n\nVelma automatically monitors and alerts for:\n\n**30 Days Before Expiry:**\n- NDIS Worker Screening Checks\n- Working with Children Checks\n\n**60 Days Before Expiry:**\n- First Aid Certificates\n- CPR Certificates\n\n**90 Days Before Expiry:**\n- Police Checks\n\nWorkers cannot work shifts if credentials have expired.\n\n**Note:** This is demo mode. Connect to the Velma API for real-time credential tracking.`,
+                action: 'respond'
+            };
+        }
+
+        // Default response
+        return {
+            status: 'success',
+            message: `Hello! I'm Velma, your NDIS AI assistant.\n\n**Demo Mode Active** - This is a preview of Velma running without a backend API.\n\nI can help you with:\n- SCHADS Award rates and calculations\n- NDIS compliance requirements\n- Payroll calculations\n- Employee onboarding\n- Leave entitlements\n- Credential tracking\n\n**To access full features:**\n1. Deploy the Velma backend API\n2. Update \`frontend/config.js\` with your API URL\n3. Set \`DEMO_MODE = false\`\n\nTry asking: "What are the SCHADS rates?" or "Calculate pay for a Saturday shift"`,
+            action: 'respond'
+        };
     },
 
     /**
