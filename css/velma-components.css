@@ -13,13 +13,15 @@
   background-color: var(--color-white);
   border-right: 1px solid var(--color-gray-200);
   z-index: var(--z-fixed);
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   transition: transform var(--transition-base);
 }
 
 .sidebar-header {
   padding: var(--spacing-xl);
   border-bottom: 1px solid var(--color-gray-200);
+  flex-shrink: 0;
 }
 
 .sidebar-logo {
@@ -46,6 +48,9 @@
 
 .sidebar-nav {
   padding: var(--spacing-lg);
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar-nav-section {
@@ -107,13 +112,35 @@
 }
 
 .sidebar-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   padding: var(--spacing-lg);
   border-top: 1px solid var(--color-gray-200);
   background-color: var(--color-white);
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+/* Scrollbar styling for sidebar nav */
+.sidebar-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background-color: var(--color-gray-300);
+  border-radius: var(--radius-full);
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-gray-400);
+}
+
+/* Firefox scrollbar */
+.sidebar-nav {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-300) transparent;
 }
 
 /* ===== Top Bar ===== */
