@@ -5,15 +5,21 @@ REST API for interacting with Velma
 
 from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 import uvicorn
+from pathlib import Path
 
 from ..core import Velma
 from ..utils import Config, get_logger
 
 logger = get_logger(__name__)
+
+# Get the frontend directory path
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+FRONTEND_DIR = BASE_DIR / "frontend"
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -30,6 +36,20 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount static files (frontend)
+if FRONTEND_DIR.exists():
+    # Mount CSS, JS, and other static assets
+    if (FRONTEND_DIR / "css").exists():
+        app.mount("/css", StaticFiles(directory=str(FRONTEND_DIR / "css")), name="css")
+    if (FRONTEND_DIR / "js").exists():
+        app.mount("/js", StaticFiles(directory=str(FRONTEND_DIR / "js")), name="js")
+    if (FRONTEND_DIR / "images").exists():
+        app.mount("/images", StaticFiles(directory=str(FRONTEND_DIR / "images")), name="images")
+
+    logger.info(f"Serving frontend from: {FRONTEND_DIR}")
+else:
+    logger.warning(f"Frontend directory not found: {FRONTEND_DIR}")
 
 # Global Velma instance
 config = Config()
@@ -68,77 +88,40 @@ class ChatResponse(BaseModel):
 
 
 # API Routes
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 async def root():
-    """Root endpoint with simple web interface"""
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Velma - NDIS AI Assistant</title>
-        <style>
-            body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
-            h1 { color: #2c3e50; }
-            .chat-container { border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 20px 0; }
-            #messages { height: 400px; overflow-y: auto; border: 1px solid #eee; padding: 15px; margin-bottom: 15px; }
-            .message { margin: 10px 0; padding: 10px; border-radius: 5px; }
-            .user { background: #e3f2fd; text-align: right; }
-            .assistant { background: #f5f5f5; }
-            input { width: 80%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-            button { padding: 10px 20px; background: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer; }
-            button:hover { background: #1976D2; }
-        </style>
-    </head>
-    <body>
-        <h1>🤖 Velma - NDIS Virtual AI Executive Suite</h1>
-        <p>Your intelligent assistant for executive tasks, reception, HR, and payroll.</p>
+    """Redirect to frontend dashboard"""
+    index_file = FRONTEND_DIR / "index.html"
+    if index_file.exists():
+        return FileResponse(index_file)
+    else:
+        # Fallback to API documentation
+        return RedirectResponse(url="/docs")
 
-        <div class="chat-container">
-            <div id="messages"></div>
-            <input type="text" id="messageInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendMessage()">
-            <button onclick="sendMessage()">Send</button>
-        </div>
 
-        <script>
-            async function sendMessage() {
-                const input = document.getElementById('messageInput');
-                const message = input.value.trim();
-                if (!message) return;
+@app.get("/favicon.svg")
+async def favicon():
+    """Serve favicon"""
+    favicon_file = FRONTEND_DIR / "favicon.svg"
+    if favicon_file.exists():
+        return FileResponse(favicon_file, media_type="image/svg+xml")
+    return {"error": "Favicon not found"}
 
-                // Display user message
-                addMessage(message, 'user');
-                input.value = '';
 
-                // Send to API
-                try {
-                    const response = await fetch('/api/chat', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ message: message })
-                    });
+@app.get("/favicon.ico")
+async def favicon_ico():
+    """Serve favicon (fallback for browsers requesting .ico)"""
+    # Redirect to SVG version
+    return RedirectResponse(url="/favicon.svg")
 
-                    const data = await response.json();
-                    addMessage(data.message, 'assistant');
-                } catch (error) {
-                    addMessage('Error: ' + error.message, 'assistant');
-                }
-            }
 
-            function addMessage(text, sender) {
-                const messagesDiv = document.getElementById('messages');
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'message ' + sender;
-                messageDiv.textContent = text;
-                messagesDiv.appendChild(messageDiv);
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }
-
-            // Add welcome message
-            addMessage('Hello! I\'m Velma, your AI executive assistant. How can I help you today?', 'assistant');
-        </script>
-    </body>
-    </html>
-    """
+@app.get("/{page_name}.html")
+async def serve_page(page_name: str):
+    """Serve HTML pages from frontend"""
+    page_file = FRONTEND_DIR / f"{page_name}.html"
+    if page_file.exists():
+        return FileResponse(page_file)
+    raise HTTPException(status_code=404, detail="Page not found")
 
 
 @app.get("/health")
