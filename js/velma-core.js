@@ -231,18 +231,26 @@ const VelmaAPI = {
                 })
             });
 
+            // Check if response is JSON before parsing
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                console.warn('API endpoint returned non-JSON response (likely 404 or not deployed)');
+                console.log('Using demo mode fallback');
+                return this.getDemoResponse(message);
+            }
+
             const data = await response.json();
 
             // Check if server returned demo_mode flag (API key not configured)
             if (data.demo_mode) {
                 console.warn('Server API not configured, using demo mode:', data.message);
-                VelmaToast.warning('API not configured on server. Using demo mode.', 5000);
                 return this.getDemoResponse(message);
             }
 
             // Handle error responses
             if (!response.ok || data.error) {
-                throw new Error(data.message || 'API request failed');
+                console.error('API error:', data.message || 'Unknown error');
+                return this.getDemoResponse(message);
             }
 
             // Return successful response
@@ -251,11 +259,9 @@ const VelmaAPI = {
         } catch (error) {
             console.error('API call failed, falling back to demo mode:', error);
 
-            // Show user-friendly error message
-            if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                console.log('Network error or API not available, using demo mode');
-            } else {
-                VelmaToast.warning('API temporarily unavailable. Using demo mode.', 5000);
+            // Don't show error toast for expected demo mode scenarios
+            if (!error.message.includes('JSON') && !error.message.includes('NetworkError')) {
+                console.warn('Unexpected API error, but continuing with demo mode');
             }
 
             // Fall back to demo mode
