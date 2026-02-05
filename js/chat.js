@@ -56,6 +56,45 @@ class VelmaChat {
 
         // Load chat history from session storage
         this.loadChatHistory();
+
+        // Update status badge based on API configuration
+        this.updateStatusBadge();
+    }
+
+    updateStatusBadge() {
+        const statusBadge = document.getElementById('statusBadge');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const hasApiKey = localStorage.getItem('velma_anthropic_api_key');
+
+        // Update status badge
+        if (statusBadge) {
+            if (hasApiKey) {
+                statusBadge.textContent = 'AI Active';
+                statusBadge.className = 'badge badge-success';
+                statusBadge.title = 'Connected to Anthropic Claude API';
+            } else {
+                statusBadge.textContent = 'Demo Mode';
+                statusBadge.className = 'badge badge-warning';
+                statusBadge.title = 'Using demo responses. Configure API key in Settings for full functionality.';
+            }
+        }
+
+        // Update welcome message with API status
+        if (welcomeMessage && !hasApiKey) {
+            const demoNotice = document.createElement('div');
+            demoNotice.style.cssText = 'margin-top: var(--spacing-md); padding: var(--spacing-sm); background: var(--color-warning-light); border-left: 3px solid var(--color-warning); border-radius: 4px; font-size: var(--font-size-sm);';
+            demoNotice.innerHTML = `
+                <strong>Demo Mode:</strong> I'm currently using simulated responses.
+                To access the full AI capabilities, please configure your Anthropic API key in
+                <a href="settings.html" style="color: var(--color-primary); text-decoration: underline;">Settings</a>.
+            `;
+
+            // Only add if not already added
+            if (!welcomeMessage.querySelector('[data-demo-notice]')) {
+                demoNotice.setAttribute('data-demo-notice', 'true');
+                welcomeMessage.appendChild(demoNotice);
+            }
+        }
     }
 
     autoResizeTextarea() {
