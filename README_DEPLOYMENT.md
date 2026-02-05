@@ -99,7 +99,7 @@ NDIS/
 
 ## 🔧 Configuration
 
-### Edit `config.js` to customize:
+### 1. Edit `config.js` to customize:
 
 ```javascript
 window.VELMA_CONFIG = {
@@ -123,6 +123,30 @@ window.VELMA_CONFIG = {
     }
 };
 ```
+
+### 2. Configure AI Chat (Required for Full Functionality)
+
+To enable real AI responses instead of demo mode, add your Anthropic API key to Vercel:
+
+**Via Vercel Dashboard:**
+1. Go to your project **Settings** → **Environment Variables**
+2. Add `ANTHROPIC_API_KEY` with your API key from https://console.anthropic.com/
+3. Optionally add `AI_MODEL` (default: `claude-sonnet-4-5-20250929`)
+4. **Redeploy** your application
+
+**Via Vercel CLI:**
+```bash
+vercel env add ANTHROPIC_API_KEY
+# Paste your API key
+vercel --prod
+```
+
+**For detailed instructions, see:** [VERCEL_SETUP.md](VERCEL_SETUP.md)
+
+**Benefits:**
+- ✅ API key stored securely on server (never exposed to clients)
+- ✅ Real AI responses powered by Claude
+- ✅ Automatic fallback to demo mode if not configured
 
 ## 🌐 Access Your Site
 

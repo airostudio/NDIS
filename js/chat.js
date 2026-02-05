@@ -61,38 +61,60 @@ class VelmaChat {
         this.updateStatusBadge();
     }
 
-    updateStatusBadge() {
+    async updateStatusBadge() {
         const statusBadge = document.getElementById('statusBadge');
         const welcomeMessage = document.getElementById('welcomeMessage');
-        const hasApiKey = localStorage.getItem('velma_anthropic_api_key');
 
-        // Update status badge
-        if (statusBadge) {
-            if (hasApiKey) {
-                statusBadge.textContent = 'AI Active';
-                statusBadge.className = 'badge badge-success';
-                statusBadge.title = 'Connected to Anthropic Claude API';
-            } else {
+        // Check if server API is configured by making a test call
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: 'test',
+                    history: []
+                })
+            });
+
+            const data = await response.json();
+            const isApiConfigured = !data.demo_mode && response.ok;
+
+            // Update status badge
+            if (statusBadge) {
+                if (isApiConfigured) {
+                    statusBadge.textContent = 'AI Active';
+                    statusBadge.className = 'badge badge-success';
+                    statusBadge.title = 'Connected to Anthropic Claude API via Vercel';
+                } else {
+                    statusBadge.textContent = 'Demo Mode';
+                    statusBadge.className = 'badge badge-warning';
+                    statusBadge.title = 'Using demo responses. API key not configured in Vercel environment.';
+                }
+            }
+
+            // Update welcome message with API status
+            if (welcomeMessage && !isApiConfigured) {
+                const demoNotice = document.createElement('div');
+                demoNotice.style.cssText = 'margin-top: var(--spacing-md); padding: var(--spacing-sm); background: var(--color-warning-light); border-left: 3px solid var(--color-warning); border-radius: 4px; font-size: var(--font-size-sm);';
+                demoNotice.innerHTML = `
+                    <strong>Demo Mode:</strong> I'm currently using simulated responses.
+                    The server API is not configured yet. Add <code>ANTHROPIC_API_KEY</code> to your Vercel environment variables to enable full AI capabilities.
+                `;
+
+                // Only add if not already added
+                if (!welcomeMessage.querySelector('[data-demo-notice]')) {
+                    demoNotice.setAttribute('data-demo-notice', 'true');
+                    welcomeMessage.appendChild(demoNotice);
+                }
+            }
+        } catch (error) {
+            console.error('Failed to check API status:', error);
+
+            // Default to demo mode on error
+            if (statusBadge) {
                 statusBadge.textContent = 'Demo Mode';
                 statusBadge.className = 'badge badge-warning';
-                statusBadge.title = 'Using demo responses. Configure API key in Settings for full functionality.';
-            }
-        }
-
-        // Update welcome message with API status
-        if (welcomeMessage && !hasApiKey) {
-            const demoNotice = document.createElement('div');
-            demoNotice.style.cssText = 'margin-top: var(--spacing-md); padding: var(--spacing-sm); background: var(--color-warning-light); border-left: 3px solid var(--color-warning); border-radius: 4px; font-size: var(--font-size-sm);';
-            demoNotice.innerHTML = `
-                <strong>Demo Mode:</strong> I'm currently using simulated responses.
-                To access the full AI capabilities, please configure your Anthropic API key in
-                <a href="settings.html" style="color: var(--color-primary); text-decoration: underline;">Settings</a>.
-            `;
-
-            // Only add if not already added
-            if (!welcomeMessage.querySelector('[data-demo-notice]')) {
-                demoNotice.setAttribute('data-demo-notice', 'true');
-                welcomeMessage.appendChild(demoNotice);
+                statusBadge.title = 'API check failed. Using demo mode.';
             }
         }
     }

@@ -158,20 +158,6 @@ const VelmaToast = {
 // API Client
 const VelmaAPI = {
     /**
-     * Get API key from localStorage
-     */
-    getApiKey() {
-        return localStorage.getItem('velma_anthropic_api_key');
-    },
-
-    /**
-     * Get selected AI model from localStorage
-     */
-    getAiModel() {
-        return localStorage.getItem('velma_ai_model') || 'claude-sonnet-4-5-20250929';
-    },
-
-    /**
      * Build conversation history for API
      */
     getConversationHistory() {
@@ -191,84 +177,6 @@ const VelmaAPI = {
         } catch (error) {
             console.error('Failed to get conversation history:', error);
             return [];
-        }
-    },
-
-    /**
-     * Call Anthropic API directly
-     */
-    async callAnthropicAPI(message) {
-        const apiKey = this.getApiKey();
-        const model = this.getAiModel();
-
-        if (!apiKey) {
-            throw new Error('No API key configured. Please set your Anthropic API key in Settings.');
-        }
-
-        // Get conversation history
-        const history = this.getConversationHistory();
-
-        // Build messages array (history + new message)
-        const messages = [...history, { role: 'user', content: message }];
-
-        // System prompt for Velma
-        const systemPrompt = `You are Velma, an AI assistant specialized in NDIS (National Disability Insurance Scheme) compliance, payroll, and operations in Australia.
-
-You help with:
-- SCHADS Award rates and calculations
-- NDIS worker compliance requirements
-- Payroll calculations with penalty rates and allowances
-- Employee onboarding and HR processes
-- Leave entitlements and calculations
-- Credential tracking and compliance alerts
-
-Be professional, accurate, and helpful. Provide specific information about Australian NDIS regulations, SCHADS Award conditions, and best practices for disability service providers.`;
-
-        try {
-            const response = await fetch('https://api.anthropic.com/v1/messages', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': apiKey,
-                    'anthropic-version': '2023-06-01'
-                },
-                body: JSON.stringify({
-                    model: model,
-                    max_tokens: 2048,
-                    system: systemPrompt,
-                    messages: messages
-                })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error?.message || `API request failed with status ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            // Extract response text
-            const responseText = data.content
-                .filter(block => block.type === 'text')
-                .map(block => block.text)
-                .join('\n\n');
-
-            return {
-                status: 'success',
-                message: responseText,
-                action: 'respond',
-                model: model,
-                usage: data.usage
-            };
-        } catch (error) {
-            console.error('Anthropic API Error:', error);
-
-            // Check if it's an authentication error
-            if (error.message.includes('401') || error.message.includes('authentication')) {
-                throw new Error('Invalid API key. Please check your Anthropic API key in Settings.');
-            }
-
-            throw error;
         }
     },
 
@@ -304,36 +212,55 @@ Be professional, accurate, and helpful. Provide specific information about Austr
      * Send chat message
      */
     async chat(message, context = {}) {
-        // Check if we have an API key - if so, use real Anthropic API
-        const apiKey = this.getApiKey();
+        // Get conversation history
+        const history = this.getConversationHistory();
 
-        if (apiKey) {
-            try {
-                console.log('Using Anthropic API with configured key');
-                return await this.callAnthropicAPI(message);
-            } catch (error) {
-                console.error('Anthropic API call failed, falling back to demo mode:', error);
-                VelmaToast.warning('API call failed: ' + error.message, 8000);
-                // Fall back to demo mode
+        try {
+            // Call Vercel serverless function at /api/chat
+            // This function uses ANTHROPIC_API_KEY from environment variables
+            console.log('Calling Velma API at /api/chat');
+
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: message,
+                    history: history
+                })
+            });
+
+            const data = await response.json();
+
+            // Check if server returned demo_mode flag (API key not configured)
+            if (data.demo_mode) {
+                console.warn('Server API not configured, using demo mode:', data.message);
+                VelmaToast.warning('API not configured on server. Using demo mode.', 5000);
                 return this.getDemoResponse(message);
             }
-        }
 
-        // Demo mode - return simulated responses
-        if (DEMO_MODE || !API_BASE_URL) {
-            console.log('Using demo mode (no API key configured)');
+            // Handle error responses
+            if (!response.ok || data.error) {
+                throw new Error(data.message || 'API request failed');
+            }
+
+            // Return successful response
+            return data;
+
+        } catch (error) {
+            console.error('API call failed, falling back to demo mode:', error);
+
+            // Show user-friendly error message
+            if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                console.log('Network error or API not available, using demo mode');
+            } else {
+                VelmaToast.warning('API temporarily unavailable. Using demo mode.', 5000);
+            }
+
+            // Fall back to demo mode
             return this.getDemoResponse(message);
         }
-
-        // Try backend API if configured
-        return this.request('/api/chat', {
-            method: 'POST',
-            body: JSON.stringify({
-                message,
-                context,
-                user_id: this.getUserId()
-            })
-        });
     },
 
     /**
