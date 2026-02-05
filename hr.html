@@ -66,6 +66,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
                     HR & Compliance
+                    <span class="sidebar-nav-badge" id="alertsBadge">0</span>
                 </a>
                 <a href="payroll.html" class="sidebar-nav-item">
                     <svg class="sidebar-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,36 +129,369 @@
         <h2 style="margin: 0; font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); color: var(--color-gray-900);">
             HR & Compliance
         </h2>
+
+        <div class="topbar-actions">
+            <button class="btn btn-primary" id="addEmployeeBtn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                </svg>
+                Add Employee
+            </button>
+            <button class="btn btn-outline" id="reportIncidentBtn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                Report Incident
+            </button>
+        </div>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="card">
-            <div class="card-body" style="text-align: center; padding: var(--spacing-3xl);">
-                <svg width="64" height="64" fill="none" stroke="var(--color-primary)" viewBox="0 0 24 24" style="margin: 0 auto var(--spacing-xl);">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                </svg>
-                <h3 style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); color: var(--color-gray-900); margin-bottom: var(--spacing-md);">
-                    HR & Compliance Module
-                </h3>
-                <p style="font-size: var(--font-size-lg); color: var(--color-gray-600); margin-bottom: var(--spacing-xl); max-width: 600px; margin-left: auto; margin-right: auto;">
-                    This module is currently under development. Soon you'll be able to manage employee onboarding, worker screening checks, NDIS compliance documents, and incident reporting all in one place.
-                </p>
-                <div class="alert alert-info" style="max-width: 600px; margin: 0 auto;">
-                    <strong>Coming Soon:</strong>
-                    <ul style="text-align: left; margin: var(--spacing-sm) 0 0 var(--spacing-lg); padding: 0;">
-                        <li>Employee onboarding workflows</li>
-                        <li>Worker screening check management</li>
-                        <li>WWCC and Police Check tracking</li>
-                        <li>NDIS Practice Standards compliance</li>
-                        <li>Incident reporting and management</li>
-                        <li>Training and credentials tracking</li>
-                        <li>Document management and expiry alerts</li>
-                    </ul>
+        <!-- Alert Section -->
+        <div id="alertsSection" style="margin-bottom: var(--spacing-xl);"></div>
+
+        <!-- Stats Overview -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);">
+            <div class="stat-card">
+                <div class="stat-card-icon" style="background: var(--color-primary-light);">
+                    <svg width="24" height="24" fill="none" stroke="var(--color-primary)" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
                 </div>
-                <p style="margin-top: var(--spacing-xl); font-size: var(--font-size-sm); color: var(--color-gray-500);">
-                    In the meantime, you can ask Velma questions about HR & Compliance in the <a href="chat.html">AI Chat</a>.
-                </p>
+                <div class="stat-card-content">
+                    <div class="stat-card-value" id="totalEmployees">0</div>
+                    <div class="stat-card-label">Total Employees</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-card-icon" style="background: var(--color-success-light);">
+                    <svg width="24" height="24" fill="none" stroke="var(--color-success)" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div class="stat-card-content">
+                    <div class="stat-card-value" id="compliantEmployees">0</div>
+                    <div class="stat-card-label">Fully Compliant</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-card-icon" style="background: var(--color-warning-light);">
+                    <svg width="24" height="24" fill="none" stroke="var(--color-warning)" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div class="stat-card-content">
+                    <div class="stat-card-value" id="expiringCredentials">0</div>
+                    <div class="stat-card-label">Expiring Soon (30d)</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-card-icon" style="background: var(--color-error-light);">
+                    <svg width="24" height="24" fill="none" stroke="var(--color-error)" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                </div>
+                <div class="stat-card-content">
+                    <div class="stat-card-value" id="openIncidents">0</div>
+                    <div class="stat-card-label">Open Incidents</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="card" style="margin-bottom: var(--spacing-xl);">
+            <div style="border-bottom: 1px solid var(--color-gray-200); padding: 0 var(--spacing-lg);">
+                <div style="display: flex; gap: var(--spacing-md); overflow-x: auto;">
+                    <button class="tab-button active" data-tab="employees">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        Employees
+                    </button>
+                    <button class="tab-button" data-tab="screening">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                        Screening
+                    </button>
+                    <button class="tab-button" data-tab="training">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        Training
+                    </button>
+                    <button class="tab-button" data-tab="documents">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Documents
+                    </button>
+                    <button class="tab-button" data-tab="incidents">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        Incidents
+                    </button>
+                    <button class="tab-button" data-tab="compliance">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                        </svg>
+                        NDIS Compliance
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="card-body">
+                <!-- Employees Tab -->
+                <div class="tab-content active" id="employeesTab">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+                        <h3 class="card-title">Employee Directory</h3>
+                        <div style="display: flex; gap: var(--spacing-md);">
+                            <input type="text" class="form-control" placeholder="Search employees..." id="employeeSearch" style="width: 300px;">
+                            <select class="form-select" id="filterStatus" style="width: 200px;">
+                                <option value="all">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="onboarding">Onboarding</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Position</th>
+                                    <th>Status</th>
+                                    <th>Compliance</th>
+                                    <th>Start Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employeeTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; padding: var(--spacing-3xl); color: var(--color-gray-500);">
+                                        No employees yet. Click "Add Employee" to get started.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Screening Tab -->
+                <div class="tab-content" id="screeningTab">
+                    <h3 class="card-title" style="margin-bottom: var(--spacing-lg);">Worker Screening Checks</h3>
+
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>WWCC</th>
+                                    <th>Police Check</th>
+                                    <th>NDIS Screening</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="screeningTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; padding: var(--spacing-3xl); color: var(--color-gray-500);">
+                                        No screening records yet.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Training Tab -->
+                <div class="tab-content" id="trainingTab">
+                    <h3 class="card-title" style="margin-bottom: var(--spacing-lg);">Training & Credentials</h3>
+
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>First Aid</th>
+                                    <th>CPR</th>
+                                    <th>Manual Handling</th>
+                                    <th>Other Certifications</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="trainingTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; padding: var(--spacing-3xl); color: var(--color-gray-500);">
+                                        No training records yet.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Documents Tab -->
+                <div class="tab-content" id="documentsTab">
+                    <h3 class="card-title" style="margin-bottom: var(--spacing-lg);">Document Management</h3>
+
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Document</th>
+                                    <th>Employee</th>
+                                    <th>Type</th>
+                                    <th>Upload Date</th>
+                                    <th>Expiry Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="documentsTableBody">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; padding: var(--spacing-3xl); color: var(--color-gray-500);">
+                                        No documents uploaded yet.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Incidents Tab -->
+                <div class="tab-content" id="incidentsTab">
+                    <h3 class="card-title" style="margin-bottom: var(--spacing-lg);">Incident Reports</h3>
+
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Incident ID</th>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Severity</th>
+                                    <th>Reporter</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="incidentsTableBody">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; padding: var(--spacing-3xl); color: var(--color-gray-500);">
+                                        No incidents reported.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- NDIS Compliance Tab -->
+                <div class="tab-content" id="complianceTab">
+                    <h3 class="card-title" style="margin-bottom: var(--spacing-lg);">NDIS Practice Standards Compliance</h3>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg);">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 style="font-size: var(--font-size-base); margin: 0;">Core Module</h4>
+                            </div>
+                            <div class="card-body">
+                                <div style="margin-bottom: var(--spacing-md);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                                        <span style="font-size: var(--font-size-sm);">Rights and Responsibilities</span>
+                                        <span style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);">85%</span>
+                                    </div>
+                                    <div style="height: 8px; background: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                        <div style="height: 100%; width: 85%; background: var(--color-success);"></div>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: var(--spacing-md);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                                        <span style="font-size: var(--font-size-sm);">Person-Centred Supports</span>
+                                        <span style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);">92%</span>
+                                    </div>
+                                    <div style="height: 8px; background: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                        <div style="height: 100%; width: 92%; background: var(--color-success);"></div>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: var(--spacing-md);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                                        <span style="font-size: var(--font-size-sm);">Governance and Operations</span>
+                                        <span style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);">78%</span>
+                                    </div>
+                                    <div style="height: 8px; background: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                        <div style="height: 100%; width: 78%; background: var(--color-warning);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 style="font-size: var(--font-size-base); margin: 0;">High Intensity Supports</h4>
+                            </div>
+                            <div class="card-body">
+                                <div style="margin-bottom: var(--spacing-md);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                                        <span style="font-size: var(--font-size-sm);">Specialist Support Coordination</span>
+                                        <span style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);">88%</span>
+                                    </div>
+                                    <div style="height: 8px; background: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                        <div style="height: 100%; width: 88%; background: var(--color-success);"></div>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: var(--spacing-md);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                                        <span style="font-size: var(--font-size-sm);">Behaviour Support</span>
+                                        <span style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);">95%</span>
+                                    </div>
+                                    <div style="height: 8px; background: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                        <div style="height: 100%; width: 95%; background: var(--color-success);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 style="font-size: var(--font-size-base); margin: 0;">Supplementary Module</h4>
+                            </div>
+                            <div class="card-body">
+                                <div style="margin-bottom: var(--spacing-md);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                                        <span style="font-size: var(--font-size-sm);">Early Childhood Supports</span>
+                                        <span style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);">90%</span>
+                                    </div>
+                                    <div style="height: 8px; background: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                        <div style="height: 100%; width: 90%; background: var(--color-success);"></div>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: var(--spacing-md);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                                        <span style="font-size: var(--font-size-sm);">Specialist Disability Accommodation</span>
+                                        <span style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);">82%</span>
+                                    </div>
+                                    <div style="height: 8px; background: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                        <div style="height: 100%; width: 82%; background: var(--color-success);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info" style="margin-top: var(--spacing-xl);">
+                        <strong>Next Audit Due:</strong> March 15, 2026 (39 days remaining)
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -165,5 +499,6 @@
     <!-- Scripts -->
     <script src="/config.js"></script>
     <script src="/js/velma-core.js"></script>
+    <script src="/js/hr.js"></script>
 </body>
 </html>
