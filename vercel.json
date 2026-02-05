@@ -1,23 +1,6 @@
 {
-  "version": 2,
-  "public": true,
-  "buildCommand": "echo 'No build needed - static frontend'",
-  "outputDirectory": "frontend",
   "cleanUrls": true,
   "trailingSlash": false,
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
   "headers": [
     {
       "source": "/css/(.*)",
@@ -55,6 +38,15 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).html",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html; charset=utf-8"
         }
       ]
     }
