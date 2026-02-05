@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NDIS Payroll Calculator - SCHADS Award">
+    <title>Payroll Calculator - Velma NDIS</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/velma-core.css">
+    <link rel="stylesheet" href="/css/velma-components.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <div class="sidebar-logo-icon">V</div>
+                <span>Velma</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="sidebar-nav-section">
+                <h6 class="sidebar-nav-title">Main</h6>
+                <a href="index.html" class="sidebar-nav-item">
+                    <svg class="sidebar-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="chat.html" class="sidebar-nav-item">
+                    <svg class="sidebar-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                    </svg>
+                    AI Chat
+                </a>
+            </div>
+
+            <div class="sidebar-nav-section">
+                <h6 class="sidebar-nav-title">NDIS Modules</h6>
+                <a href="hr.html" class="sidebar-nav-item">
+                    <svg class="sidebar-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    HR & Compliance
+                </a>
+                <a href="payroll.html" class="sidebar-nav-item active">
+                    <svg class="sidebar-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Payroll
+                </a>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="topbar-user">
+                <div class="topbar-user-avatar">AD</div>
+                <div class="topbar-user-info">
+                    <div class="topbar-user-name">Admin User</div>
+                    <div class="topbar-user-role">Administrator</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Top Bar -->
+    <header class="topbar">
+        <button class="btn btn-ghost btn-icon" id="menuToggle" aria-label="Toggle menu">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+
+        <div style="flex: 1;">
+            <h2 style="margin: 0; font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); color: var(--color-gray-900);">
+                SCHADS Award Payroll Calculator
+            </h2>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Payroll Calculator</h1>
+            <p class="page-subtitle">Calculate pay with SCHADS Award rates, penalties, and allowances</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); margin-bottom: var(--spacing-xl);">
+            <!-- Calculator Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Shift Details</h3>
+                </div>
+                <div class="card-body">
+                    <form id="payrollForm">
+                        <div class="form-group">
+                            <label class="form-label form-label-required">Classification Level</label>
+                            <select id="classification" class="form-select" required>
+                                <option value="">Select classification...</option>
+                                <option value="1.1">Level 1.1 - Entry level ($27.15/hr)</option>
+                                <option value="1.2">Level 1.2 - After 3 months ($27.85/hr)</option>
+                                <option value="2.1" selected>Level 2.1 - Cert II or 6mo exp ($28.45/hr)</option>
+                                <option value="2.2">Level 2.2 - Certificate III ($29.15/hr)</option>
+                                <option value="2.3">Level 2.3 - Cert III + skills ($29.85/hr)</option>
+                                <option value="3.1">Level 3.1 - Advanced skills ($30.85/hr)</option>
+                                <option value="3.2">Level 3.2 - Certificate IV ($31.55/hr)</option>
+                                <option value="3.3">Level 3.3 - Senior role ($32.25/hr)</option>
+                                <option value="4.1">Level 4.1 - Team leader ($33.95/hr)</option>
+                                <option value="4.2">Level 4.2 - Senior coordinator ($35.15/hr)</option>
+                                <option value="4.3">Level 4.3 - Manager ($36.45/hr)</option>
+                            </select>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                            <div class="form-group">
+                                <label class="form-label form-label-required">Shift Date</label>
+                                <input type="date" id="shiftDate" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Day Type</label>
+                                <select id="dayType" class="form-select">
+                                    <option value="weekday">Weekday</option>
+                                    <option value="saturday">Saturday</option>
+                                    <option value="sunday">Sunday</option>
+                                    <option value="public_holiday">Public Holiday</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                            <div class="form-group">
+                                <label class="form-label form-label-required">Start Time</label>
+                                <input type="time" id="startTime" class="form-control" value="09:00" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label form-label-required">End Time</label>
+                                <input type="time" id="endTime" class="form-control" value="17:00" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Shift Type</label>
+                            <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap;">
+                                <label style="display: flex; align-items: center; gap: var(--spacing-xs); cursor: pointer;">
+                                    <input type="checkbox" id="isSleepover">
+                                    <span>Sleepover (+$62.45)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--spacing-xs); cursor: pointer;">
+                                    <input type="checkbox" id="isBrokenShift">
+                                    <span>Broken Shift (+$4.85)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Travel Distance (km)</label>
+                            <input type="number" id="travelKm" class="form-control" value="0" min="0" step="0.1">
+                            <span class="form-helper">$0.85 per km</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                            </svg>
+                            Calculate Pay
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Display -->
+            <div class="card" id="resultsCard" style="display: none;">
+                <div class="card-header">
+                    <h3 class="card-title">Pay Calculation</h3>
+                    <button class="btn btn-sm btn-ghost" onclick="window.print()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                        </svg>
+                        Print
+                    </button>
+                </div>
+                <div class="card-body" id="resultsContent">
+                    <!-- Results will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SCHADS Rates Reference -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">SCHADS Award 2010 - Quick Reference (2026 Rates)</h3>
+            </div>
+            <div class="card-body">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-xl);">
+                    <div>
+                        <h4 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: var(--color-gray-700);">Penalty Rates</h4>
+                        <div style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Afternoon (3pm-8pm)</span>
+                                <strong>1.15x</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Night (8pm-7am)</span>
+                                <strong>1.25x</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Saturday</span>
+                                <strong>1.5x</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Sunday</span>
+                                <strong>1.75x</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Public Holiday</span>
+                                <strong>2.5x</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: var(--color-gray-700);">Allowances</h4>
+                        <div style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Sleepover</span>
+                                <strong>$62.45</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Broken Shift</span>
+                                <strong>$4.85</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Meal (>5 hours)</span>
+                                <strong>$18.35</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Travel (per km)</span>
+                                <strong>$0.85</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: var(--color-gray-700);">Additional</h4>
+                        <div style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Leave Loading</span>
+                                <strong>17.5%</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Superannuation</span>
+                                <strong>11.5%</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/velma-core.js"></script>
+    <script src="/js/schads-calculator.js"></script>
+    <script>
+        // Initialize calculator
+        const calculator = new SCHADSCalculator();
+
+        // Set default date to today
+        document.getElementById('shiftDate').valueAsDate = new Date();
+
+        // Auto-detect day type from date
+        document.getElementById('shiftDate').addEventListener('change', function() {
+            const date = new Date(this.value);
+            const dayOfWeek = date.getDay();
+            const dayTypeSelect = document.getElementById('dayType');
+
+            if (dayOfWeek === 0) {
+                dayTypeSelect.value = 'sunday';
+            } else if (dayOfWeek === 6) {
+                dayTypeSelect.value = 'saturday';
+            } else {
+                dayTypeSelect.value = 'weekday';
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('payrollForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculatePay();
+        });
+
+        function calculatePay() {
+            // Get form values
+            const classification = document.getElementById('classification').value;
+            const shiftDate = document.getElementById('shiftDate').value;
+            const dayType = document.getElementById('dayType').value;
+            const startTimeStr = document.getElementById('startTime').value;
+            const endTimeStr = document.getElementById('endTime').value;
+            const isSleepover = document.getElementById('isSleepover').checked;
+            const isBrokenShift = document.getElementById('isBrokenShift').checked;
+            const travelKm = parseFloat(document.getElementById('travelKm').value) || 0;
+
+            // Create datetime objects
+            const startTime = new Date(`${shiftDate}T${startTimeStr}`);
+            const endTime = new Date(`${shiftDate}T${endTimeStr}`);
+
+            // If end time is before start time, it's next day
+            if (endTime < startTime) {
+                endTime.setDate(endTime.getDate() + 1);
+            }
+
+            // Calculate
+            try {
+                const result = calculator.calculateShiftPay({
+                    classification,
+                    startTime,
+                    endTime,
+                    isPublicHoliday: dayType === 'public_holiday',
+                    isSleepover,
+                    isBrokenShift,
+                    travelKm
+                });
+
+                displayResults(result);
+            } catch (error) {
+                VelmaToast.error(error.message);
+            }
+        }
+
+        function displayResults(result) {
+            const resultsCard = document.getElementById('resultsCard');
+            const resultsContent = document.getElementById('resultsContent');
+
+            // Build breakdown HTML
+            let breakdownHTML = '';
+            if (result.breakdown && result.breakdown.length > 0) {
+                breakdownHTML = `
+                    <div style="margin-top: var(--spacing-lg);">
+                        <h4 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md);">Period Breakdown</h4>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Period</th>
+                                        <th>Hours</th>
+                                        <th>Rate</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${result.breakdown.map(period => `
+                                        <tr>
+                                            <td>${period.period}</td>
+                                            <td>${period.hours.toFixed(2)}</td>
+                                            <td>$${period.rate.toFixed(2)}/hr</td>
+                                            <td><strong>$${period.total.toFixed(2)}</strong></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Build allowances HTML
+            let allowancesHTML = '';
+            if (result.allowances && Object.keys(result.allowances).length > 0) {
+                allowancesHTML = `
+                    <div style="padding: var(--spacing-md); background: var(--color-gray-50); border-radius: var(--radius-lg); margin-bottom: var(--spacing-md);">
+                        <h4 style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); margin-bottom: var(--spacing-sm);">Allowances</h4>
+                        ${Object.entries(result.allowances).map(([key, allowance]) => `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                                <span style="font-size: var(--font-size-sm);">${allowance.description}</span>
+                                <span style="font-size: var(--font-size-sm); font-weight: var(--font-weight-medium);">$${allowance.amount.toFixed(2)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            resultsContent.innerHTML = `
+                <div style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
+                    <!-- Summary -->
+                    <div style="padding: var(--spacing-xl); background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); border-radius: var(--radius-xl); color: white;">
+                        <div style="font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--spacing-xs);">Gross Pay</div>
+                        <div style="font-size: var(--font-size-4xl); font-weight: var(--font-weight-bold);">$${result.grossPay.toFixed(2)}</div>
+                        <div style="font-size: var(--font-size-sm); opacity: 0.9; margin-top: var(--spacing-sm);">${result.hours.toFixed(2)} hours @ Level ${result.classification}</div>
+                    </div>
+
+                    <!-- Breakdown -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                        <div style="padding: var(--spacing-md); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg);">
+                            <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--spacing-xs);">Ordinary Pay</div>
+                            <div style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-semibold);">$${result.ordinaryPay.toFixed(2)}</div>
+                        </div>
+                        <div style="padding: var(--spacing-md); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg);">
+                            <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--spacing-xs);">Penalty Pay</div>
+                            <div style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-semibold); color: var(--color-warning);">$${result.penaltyPay.toFixed(2)}</div>
+                        </div>
+                    </div>
+
+                    ${allowancesHTML}
+
+                    <!-- Superannuation -->
+                    <div style="padding: var(--spacing-md); background: var(--color-gray-50); border-radius: var(--radius-lg);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);">Superannuation (11.5%)</div>
+                                <div style="font-size: var(--font-size-xs); color: var(--color-gray-600);">On ordinary time earnings</div>
+                            </div>
+                            <div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-success);">$${result.superannuation.toFixed(2)}</div>
+                        </div>
+                    </div>
+
+                    ${breakdownHTML}
+
+                    <!-- Base Rate Info -->
+                    <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); padding: var(--spacing-md); background: var(--color-gray-50); border-radius: var(--radius-lg);">
+                        <strong>Base Rate:</strong> $${result.baseRate.toFixed(2)}/hour<br>
+                        <strong>Classification:</strong> SCHADS Level ${result.classification}<br>
+                        <strong>Total Hours:</strong> ${result.hours.toFixed(2)}
+                    </div>
+                </div>
+            `;
+
+            resultsCard.style.display = 'block';
+            resultsCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            VelmaToast.success('Pay calculated successfully');
+        }
+    </script>
+</body>
+</html>
