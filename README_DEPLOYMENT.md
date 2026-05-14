@@ -1,4 +1,4 @@
-# Velma NDIS - Deployment Guide
+# Cheryl NDIS - Deployment Guide
 
 ## ✅ Ready for Vercel Deployment
 
@@ -14,16 +14,16 @@ NDIS/
 ├── config.js              ← Frontend configuration
 ├── favicon.svg            ← Site favicon
 ├── css/                   ← Stylesheets
-│   ├── velma-core.css
-│   └── velma-components.css
+│   ├── cheryl-core.css
+│   └── cheryl-components.css
 ├── js/                    ← JavaScript
-│   ├── velma-core.js
+│   ├── cheryl-core.js
 │   ├── chat.js
 │   ├── dashboard.js
 │   └── schads-calculator.js
 ├── vercel.json            ← Vercel configuration
 ├── frontend/              ← Original frontend (backup)
-└── velma/                 ← Python backend (optional)
+└── cheryl/                 ← Python backend (optional)
 ```
 
 ## 🚀 Deploy to Vercel
@@ -102,7 +102,7 @@ NDIS/
 ### 1. Edit `config.js` to customize:
 
 ```javascript
-window.VELMA_CONFIG = {
+window.CHERYL_CONFIG = {
     // Set to your backend API if you deploy one
     API_BASE_URL: '',
 
@@ -180,7 +180,7 @@ All pages are fully responsive and work on:
 ## 🎨 Customization
 
 ### Colors
-Edit `css/velma-core.css`:
+Edit `css/cheryl-core.css`:
 ```css
 :root {
   --color-primary: #0066CC;
@@ -255,6 +255,6 @@ All can be added without a backend!
 
 ## 🎉 You're Ready!
 
-Your Velma NDIS platform is ready to deploy. Just push to GitHub and connect to Vercel!
+Your Cheryl NDIS platform is ready to deploy. Just push to GitHub and connect to Vercel!
 
 **Questions?** Check the documentation or open an issue.

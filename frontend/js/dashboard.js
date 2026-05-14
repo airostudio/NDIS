@@ -1,5 +1,5 @@
 /**
- * Velma Dashboard
+ * Cheryl Dashboard
  * Dashboard-specific functionality
  */
 

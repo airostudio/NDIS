@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="NDIS Payroll Calculator - SCHADS Award">
-    <title>Payroll Calculator - Velma NDIS</title>
+    <title>Payroll Calculator - Cheryl NDIS</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/velma-core.css">
-    <link rel="stylesheet" href="/css/velma-components.css">
+    <link rel="stylesheet" href="/css/cheryl-core.css">
+    <link rel="stylesheet" href="/css/cheryl-components.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -24,8 +24,8 @@
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <a href="index.html" class="sidebar-logo">
-                <div class="sidebar-logo-icon">V</div>
-                <span>Velma</span>
+                <div class="sidebar-logo-icon">C</div>
+                <span>Cheryl</span>
             </a>
         </div>
 
@@ -273,7 +273,7 @@
     </main>
 
     <!-- Scripts -->
-    <script src="/js/velma-core.js"></script>
+    <script src="/js/cheryl-core.js"></script>
     <script src="/js/schads-calculator.js"></script>
     <script>
         // Initialize calculator
@@ -337,7 +337,7 @@
 
                 displayResults(result);
             } catch (error) {
-                VelmaToast.error(error.message);
+                CherylToast.error(error.message);
             }
         }
 
@@ -441,7 +441,7 @@
             resultsCard.style.display = 'block';
             resultsCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-            VelmaToast.success('Pay calculated successfully');
+            CherylToast.success('Pay calculated successfully');
         }
     </script>
 </body>

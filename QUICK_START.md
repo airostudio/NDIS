@@ -1,6 +1,6 @@
-# Velma Quick Start Guide
+# Cheryl Quick Start Guide
 
-Get Velma up and running in 5 minutes!
+Get Cheryl up and running in 5 minutes!
 
 ## Prerequisites
 
@@ -13,22 +13,22 @@ Get Velma up and running in 5 minutes!
 ### Linux/Mac
 ```bash
 cd /path/to/NDIS
-./start_velma.sh
+./start_cheryl.sh
 ```
 
 ### Windows
 ```cmd
 cd C:\path\to\NDIS
-start_velma.bat
+start_cheryl.bat
 ```
 
 The script will:
 1. Create a virtual environment (if needed)
 2. Install dependencies
 3. Create .env file from template
-4. Start the Velma server
+4. Start the Cheryl server
 
-**Access Velma:**
+**Access Cheryl:**
 - **Frontend Dashboard**: http://localhost:8000
 - **Chat Interface**: http://localhost:8000/chat.html
 - **API Documentation**: http://localhost:8000/docs
@@ -76,7 +76,7 @@ nano .env  # or use your preferred editor
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
 
 # Database (SQLite for testing, PostgreSQL for production)
-DATABASE_URL=sqlite:///./velma.db
+DATABASE_URL=sqlite:///./cheryl.db
 
 # Company Information
 COMPANY_NAME=Your NDIS Company Name
@@ -98,7 +98,7 @@ python scripts/run_api.py
 
 The server will start on http://localhost:8000
 
-## Accessing Velma
+## Accessing Cheryl
 
 ### Frontend Interface (Recommended)
 
@@ -107,7 +107,7 @@ The server will start on http://localhost:8000
    - Quick access to all modules
 
 2. **Chat Interface**: Navigate to http://localhost:8000/chat.html
-   - Interactive AI chat with Velma
+   - Interactive AI chat with Cheryl
    - Suggested prompts for common tasks
    - Real-time conversation
 
@@ -170,7 +170,7 @@ Edit `.env` to configure:
 **Email (SendGrid):**
 ```env
 SENDGRID_API_KEY=your_sendgrid_key
-FROM_EMAIL=velma@yourcompany.com.au
+FROM_EMAIL=cheryl@yourcompany.com.au
 ```
 
 **SMS (Twilio):**
@@ -188,7 +188,7 @@ GOOGLE_CLIENT_SECRET=your_client_secret
 
 ### SCHADS Award Rates
 
-Update rates annually in `config/velma_config.yaml`:
+Update rates annually in `config/cheryl_config.yaml`:
 ```yaml
 payroll:
   schads_award:
@@ -211,8 +211,8 @@ payroll:
 2. **Check browser console** (F12) for errors
 
 3. **Verify file paths:**
-   - CSS files: http://localhost:8000/css/velma-core.css
-   - JS files: http://localhost:8000/js/velma-core.js
+   - CSS files: http://localhost:8000/css/cheryl-core.css
+   - JS files: http://localhost:8000/js/cheryl-core.js
    - Favicon: http://localhost:8000/favicon.svg
 
 ### API connection issues?
@@ -236,7 +236,7 @@ API_PORT=8001
 
 Or specify when running:
 ```bash
-uvicorn velma.api.app:app --host 0.0.0.0 --port 8001
+uvicorn cheryl.api.app:app --host 0.0.0.0 --port 8001
 ```
 
 ## Development Mode
@@ -244,7 +244,7 @@ uvicorn velma.api.app:app --host 0.0.0.0 --port 8001
 For development with auto-reload:
 
 ```bash
-uvicorn velma.api.app:app --reload --host 0.0.0.0 --port 8000
+uvicorn cheryl.api.app:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ## Production Deployment
@@ -259,7 +259,7 @@ See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for production setup with:
 ## Next Steps
 
 1. **Customize Configuration**
-   - Edit `config/velma_config.yaml`
+   - Edit `config/cheryl_config.yaml`
    - Set business hours
    - Configure modules
    - Update SCHADS rates
@@ -312,6 +312,6 @@ See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for production setup with:
 ✅ **NDIS-Specific**: Payroll, HR, compliance modules
 ✅ **24/7 Available**: Always-on AI assistant
 
-**You're ready to use Velma!** 🎉
+**You're ready to use Cheryl!** 🎉
 
 Navigate to http://localhost:8000 and start exploring.

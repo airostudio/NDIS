@@ -1,10 +1,10 @@
-# Deploying Velma to Vercel
+# Deploying Cheryl to Vercel
 
-This guide explains how to deploy Velma to Vercel and connect it to your backend API.
+This guide explains how to deploy Cheryl to Vercel and connect it to your backend API.
 
-## Important: Velma Architecture
+## Important: Cheryl Architecture
 
-Velma has **two components:**
+Cheryl has **two components:**
 
 1. **Frontend** (HTML/CSS/JavaScript) - Can be deployed to Vercel ✅
 2. **Backend** (Python FastAPI) - Needs to be deployed separately ❌ (Vercel is optimized for Node.js)
@@ -72,7 +72,7 @@ Vercel should auto-configure based on `vercel.json`:
 
 Click "Deploy" - Done! ✅
 
-Your Velma frontend will be live at:
+Your Cheryl frontend will be live at:
 ```
 https://your-project.vercel.app
 ```
@@ -106,7 +106,7 @@ Choose a platform for your Python backend:
 3. Connect your GitHub repository
 4. Configure:
    - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `uvicorn velma.api.app:app --host 0.0.0.0 --port $PORT`
+   - **Start Command:** `uvicorn cheryl.api.app:app --host 0.0.0.0 --port $PORT`
 5. Add environment variables
 6. Deploy
 
@@ -134,7 +134,7 @@ After backend deployment, you'll get a URL like:
 Edit `frontend/config.js`:
 
 ```javascript
-window.VELMA_CONFIG = {
+window.CHERYL_CONFIG = {
     API_BASE_URL: 'https://your-backend-api.railway.app',  // Your backend URL
     DEMO_MODE: false,  // Disable demo mode
     COMPANY_NAME: 'Your NDIS Company'
@@ -154,7 +154,7 @@ window.VELMA_CONFIG = {
 
 3. Visit `https://your-project.vercel.app`
 
-✅ **You now have full Velma functionality!**
+✅ **You now have full Cheryl functionality!**
 
 ---
 
@@ -163,7 +163,7 @@ window.VELMA_CONFIG = {
 ### Frontend Configuration (config.js)
 
 ```javascript
-window.VELMA_CONFIG = {
+window.CHERYL_CONFIG = {
     // Your backend API URL
     API_BASE_URL: 'https://your-backend.railway.app',
 
@@ -252,7 +252,7 @@ NEXT_PUBLIC_API_URL=https://your-backend.railway.app
 **Solution:** Add your Vercel domain to backend CORS config:
 
 ```python
-# In velma/api/app.py
+# In cheryl/api/app.py
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -364,7 +364,7 @@ Similar to Railway, deploy everything together.
 - **Vercel Docs:** https://vercel.com/docs
 - **Railway Docs:** https://docs.railway.app
 - **Render Docs:** https://render.com/docs
-- **Velma Docs:** See `docs/` directory
+- **Cheryl Docs:** See `docs/` directory
 
 ---
 

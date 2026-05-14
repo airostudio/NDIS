@@ -1,6 +1,6 @@
-# Velma Frontend
+# Cheryl Frontend
 
-Modern, clinical-styled HTML5 frontend for the Velma NDIS AI Assistant.
+Modern, clinical-styled HTML5 frontend for the Cheryl NDIS AI Assistant.
 
 ## Features
 
@@ -62,10 +62,10 @@ Modern, clinical-styled HTML5 frontend for the Velma NDIS AI Assistant.
 ```
 frontend/
 ├── css/
-│   ├── velma-core.css          # Design system and base styles
-│   └── velma-components.css    # Component-specific styles
+│   ├── cheryl-core.css          # Design system and base styles
+│   └── cheryl-components.css    # Component-specific styles
 ├── js/
-│   ├── velma-core.js           # Core utilities and API client
+│   ├── cheryl-core.js           # Core utilities and API client
 │   ├── chat.js                 # Chat interface logic
 │   └── dashboard.js            # Dashboard functionality
 ├── index.html                  # Main dashboard
@@ -77,7 +77,7 @@ frontend/
 
 ### 1. Run the Backend API
 
-First, start the Velma API server:
+First, start the Cheryl API server:
 
 ```bash
 cd /path/to/NDIS
@@ -116,7 +116,7 @@ Navigate to `index.html` to see:
 
 ### Chat Interface
 Navigate to `chat.html` to:
-- Ask Velma questions about NDIS operations
+- Ask Cheryl questions about NDIS operations
 - Get payroll calculations
 - Check compliance status
 - Schedule appointments
@@ -133,9 +133,9 @@ Click any suggested prompt button to quickly ask common questions:
 
 ## API Integration
 
-The frontend connects to the Velma API at:
+The frontend connects to the Cheryl API at:
 - **Development**: `http://localhost:8000`
-- **Production**: Configured in `js/velma-core.js`
+- **Production**: Configured in `js/cheryl-core.js`
 
 ### API Endpoints Used
 - `GET /health` - Health check
@@ -145,7 +145,7 @@ The frontend connects to the Velma API at:
 ## Customization
 
 ### Colors
-Edit CSS variables in `css/velma-core.css`:
+Edit CSS variables in `css/cheryl-core.css`:
 
 ```css
 :root {
@@ -201,7 +201,7 @@ The frontend meets WCAG 2.1 Level AA standards:
 
 ### Adding Components
 
-1. Add CSS to `css/velma-components.css`
+1. Add CSS to `css/cheryl-components.css`
 2. Follow naming convention: `.component-name`
 3. Use CSS variables for colors and spacing
 4. Ensure responsive behavior
@@ -274,7 +274,7 @@ certbot --nginx -d your-domain.com
 ### API Connection Issues
 - Ensure backend is running on port 8000
 - Check browser console for CORS errors
-- Verify API_BASE_URL in `js/velma-core.js`
+- Verify API_BASE_URL in `js/cheryl-core.js`
 
 ### Styles Not Loading
 - Check file paths in HTML `<link>` tags
@@ -297,7 +297,7 @@ When adding features:
 
 ## License
 
-Part of the Velma NDIS AI Assistant project.
+Part of the Cheryl NDIS AI Assistant project.
 
 ## Support
 

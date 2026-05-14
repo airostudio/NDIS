@@ -1,6 +1,6 @@
-# Velma Features Overview
+# Cheryl Features Overview
 
-Comprehensive guide to all Velma capabilities.
+Comprehensive guide to all Cheryl capabilities.
 
 ## 1. NDIS HR & Compliance Module
 
@@ -339,4 +339,4 @@ To explore these features:
 3. **Explore API**: Visit http://localhost:8000/docs
 4. **Read Module Guides**: Check module-specific documentation
 
-For questions about specific features, ask Velma: "How do I [feature]?"
+For questions about specific features, ask Cheryl: "How do I [feature]?"

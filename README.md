@@ -1,6 +1,6 @@
-# Velma - NDIS Virtual AI Executive Suite
+# Cheryl - NDIS Virtual AI Executive Suite
 
-Velma is a comprehensive AI-powered virtual executive assistant designed specifically for NDIS (National Disability Insurance Scheme) companies. It combines executive assistant, receptionist, HR, and payroll functions into a single, intelligent 24/7 system.
+Cheryl is a comprehensive AI-powered virtual executive assistant designed specifically for NDIS (National Disability Insurance Scheme) companies. It combines executive assistant, receptionist, HR, and payroll functions into a single, intelligent 24/7 system.
 
 ## Features
 
@@ -43,7 +43,7 @@ Velma is a comprehensive AI-powered virtual executive assistant designed specifi
 ## System Architecture
 
 ```
-velma/
+cheryl/
 ├── core/               # Core AI engine and orchestration
 ├── modules/            # Function-specific modules
 │   ├── calendar/       # Calendar and time management
@@ -83,13 +83,13 @@ cp .env.example .env
 # Initialize database
 python scripts/init_db.py
 
-# Run Velma
+# Run Cheryl
 python main.py
 ```
 
 ### Configuration
 
-Edit `config/velma_config.yaml` to customize:
+Edit `config/cheryl_config.yaml` to customize:
 - AI model settings
 - Integration credentials
 - Business rules
@@ -106,7 +106,7 @@ Edit `config/velma_config.yaml` to customize:
 
 ## Security & Privacy
 
-Velma is designed with security and privacy at its core:
+Cheryl is designed with security and privacy at its core:
 - End-to-end encryption for sensitive data
 - Role-based access control (RBAC)
 - Audit logging for all operations

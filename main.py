@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Velma - NDIS Virtual AI Executive Suite
+Cheryl - NDIS Virtual AI Executive Suite
 Main application entry point
 """
 
@@ -11,27 +11,27 @@ from pathlib import Path
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from velma.core import Velma
-from velma.utils import Config, get_logger
+from cheryl.core import Cheryl
+from cheryl.utils import Config, get_logger
 
 logger = get_logger(__name__)
 
 
 async def main():
     """Main application entry point"""
-    logger.info("Starting Velma - NDIS Virtual AI Executive Suite")
+    logger.info("Starting Cheryl - NDIS Virtual AI Executive Suite")
 
     # Load configuration
     config = Config()
 
-    # Initialize Velma
-    velma = Velma(config)
+    # Initialize Cheryl
+    cheryl = Cheryl(config)
 
-    logger.info("Velma is ready!")
+    logger.info("Cheryl is ready!")
     print("\n" + "="*60)
-    print("🤖  Velma - NDIS Virtual AI Executive Suite")
+    print("🤖  Cheryl - NDIS Virtual AI Executive Suite")
     print("="*60)
-    print("\nVelma is running and ready to assist!")
+    print("\nCheryl is running and ready to assist!")
     print(f"Company: {config.company_name}")
     print(f"Timezone: {config.timezone}")
     print("\nAvailable interfaces:")
@@ -54,13 +54,13 @@ async def main():
                     break
 
                 # Process request
-                response = await velma.process_request(
+                response = await cheryl.process_request(
                     message=user_input,
                     channel="chat",
                     user_id="demo_user"
                 )
 
-                print(f"\nVelma: {response.get('message', 'No response')}")
+                print(f"\nCheryl: {response.get('message', 'No response')}")
 
             except KeyboardInterrupt:
                 break
@@ -72,9 +72,9 @@ async def main():
         pass
     finally:
         # Cleanup
-        logger.info("Shutting down Velma...")
-        await velma.shutdown()
-        logger.info("Velma shutdown complete")
+        logger.info("Shutting down Cheryl...")
+        await cheryl.shutdown()
+        logger.info("Cheryl shutdown complete")
 
 
 if __name__ == "__main__":

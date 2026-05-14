@@ -1,6 +1,6 @@
-# Velma Quick Start Guide
+# Cheryl Quick Start Guide
 
-Welcome to Velma, your NDIS Virtual AI Executive Suite!
+Welcome to Cheryl, your NDIS Virtual AI Executive Suite!
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ Edit `.env` and add your API keys and configuration:
 ANTHROPIC_API_KEY=your_api_key_here
 COMPANY_NAME=Your NDIS Company Name
 COMPANY_ABN=12345678901
-DATABASE_URL=sqlite:///velma.db  # Or PostgreSQL URL
+DATABASE_URL=sqlite:///cheryl.db  # Or PostgreSQL URL
 ```
 
 ### 3. Initialize Database
@@ -41,7 +41,7 @@ DATABASE_URL=sqlite:///velma.db  # Or PostgreSQL URL
 python scripts/init_db.py
 ```
 
-### 4. Run Velma
+### 4. Run Cheryl
 
 #### Option A: Interactive CLI Mode
 
@@ -49,7 +49,7 @@ python scripts/init_db.py
 python main.py
 ```
 
-This starts an interactive chat where you can test Velma's capabilities.
+This starts an interactive chat where you can test Cheryl's capabilities.
 
 #### Option B: API Server Mode
 
@@ -68,31 +68,31 @@ Try these example interactions:
 ### HR Questions
 ```
 You: What compliance documents do NDIS workers need?
-Velma: [Provides comprehensive list of NDIS compliance requirements]
+Cheryl: [Provides comprehensive list of NDIS compliance requirements]
 
 You: How do I onboard a new employee?
-Velma: [Provides detailed onboarding checklist]
+Cheryl: [Provides detailed onboarding checklist]
 ```
 
 ### Payroll Questions
 ```
 You: Calculate pay for Level 2.1 worker, Saturday 9am-5pm
-Velma: [Calculates exact pay with SCHADS Award rates]
+Cheryl: [Calculates exact pay with SCHADS Award rates]
 
 You: What are the current SCHADS rates?
-Velma: [Shows all classification levels and penalty rates]
+Cheryl: [Shows all classification levels and penalty rates]
 
 You: Explain superannuation requirements
-Velma: [Explains SG, rates, and compliance]
+Cheryl: [Explains SG, rates, and compliance]
 ```
 
 ### General Assistant
 ```
 You: Schedule a team meeting for next Tuesday at 2pm
-Velma: [Helps schedule the meeting]
+Cheryl: [Helps schedule the meeting]
 
 You: Who should I call about payroll questions?
-Velma: [Provides appropriate contact information]
+Cheryl: [Provides appropriate contact information]
 ```
 
 ## Key Features
@@ -122,7 +122,7 @@ Velma: [Provides appropriate contact information]
 
 ## Configuration
 
-Edit `config/velma_config.yaml` to customize:
+Edit `config/cheryl_config.yaml` to customize:
 
 - Module settings
 - Business hours
@@ -133,7 +133,7 @@ Edit `config/velma_config.yaml` to customize:
 ## Getting Help
 
 ### In-App
-Ask Velma: "How do I use this feature?"
+Ask Cheryl: "How do I use this feature?"
 
 ### Documentation
 - [Full Documentation](../README.md)
@@ -147,8 +147,8 @@ For issues or questions, contact your system administrator.
 
 1. **Configure integrations**: Connect calendar, email, and payroll systems
 2. **Import data**: Add employees, participants, and contacts
-3. **Customize**: Adjust settings in `config/velma_config.yaml`
-4. **Train staff**: Introduce team to Velma's capabilities
+3. **Customize**: Adjust settings in `config/cheryl_config.yaml`
+4. **Train staff**: Introduce team to Cheryl's capabilities
 5. **Monitor**: Review audit logs and usage
 
 ## Security Notes

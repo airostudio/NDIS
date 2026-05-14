@@ -1,5 +1,5 @@
 /**
- * Velma HR & Compliance Module
+ * Cheryl HR & Compliance Module
  * Handles employee management, screening, training, documents, and incidents
  */
 
@@ -533,7 +533,7 @@ class HRModule {
     setupButtonHandlers() {
         // Add Employee button
         document.getElementById('addEmployeeBtn')?.addEventListener('click', () => {
-            VelmaToast.info('Employee onboarding form coming soon. For now, sample data is pre-loaded.');
+            CherylToast.info('Employee onboarding form coming soon. For now, sample data is pre-loaded.');
         });
 
         // Report Incident button
@@ -608,7 +608,7 @@ class HRModule {
             </form>
         `;
 
-        VelmaModal.show(
+        CherylModal.show(
             'Report Incident',
             modalContent,
             [
@@ -639,7 +639,7 @@ class HRModule {
                             this.renderIncidentsTable();
                             this.showExpiryAlerts();
 
-                            VelmaToast.success(`Incident ${incident.id} reported successfully`);
+                            CherylToast.success(`Incident ${incident.id} reported successfully`);
                         } else {
                             form.reportValidity();
                             return false; // Don't close modal
@@ -655,22 +655,22 @@ class HRModule {
         const employee = this.dataManager.getEmployees().find(e => e.id === id);
         if (!employee) return;
 
-        VelmaToast.info(`Viewing details for ${employee.name}. Full employee profile coming soon.`);
+        CherylToast.info(`Viewing details for ${employee.name}. Full employee profile coming soon.`);
     }
 
     // Update screening
     updateScreening(id) {
-        VelmaToast.info('Screening update form coming soon.');
+        CherylToast.info('Screening update form coming soon.');
     }
 
     // Update training
     updateTraining(id) {
-        VelmaToast.info('Training update form coming soon.');
+        CherylToast.info('Training update form coming soon.');
     }
 
     // View document
     viewDocument(id) {
-        VelmaToast.info('Document viewer coming soon.');
+        CherylToast.info('Document viewer coming soon.');
     }
 
     // View incident details
@@ -691,7 +691,7 @@ class HRModule {
             </div>
         `;
 
-        VelmaModal.show(
+        CherylModal.show(
             'Incident Details',
             content,
             [

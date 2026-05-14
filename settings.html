@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Settings - Velma NDIS">
-    <title>Settings - Velma NDIS</title>
+    <meta name="description" content="Settings - Cheryl NDIS">
+    <title>Settings - Cheryl NDIS</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/velma-core.css">
-    <link rel="stylesheet" href="/css/velma-components.css">
+    <link rel="stylesheet" href="/css/cheryl-core.css">
+    <link rel="stylesheet" href="/css/cheryl-components.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -24,8 +24,8 @@
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <a href="index.html" class="sidebar-logo">
-                <div class="sidebar-logo-icon">V</div>
-                <span>Velma</span>
+                <div class="sidebar-logo-icon">C</div>
+                <span>Cheryl</span>
             </a>
         </div>
 
@@ -105,7 +105,7 @@
         <!-- Page Header -->
         <div class="page-header">
             <h1 class="page-title">Settings</h1>
-            <p class="page-subtitle">Configure Velma settings and preferences</p>
+            <p class="page-subtitle">Configure Cheryl settings and preferences</p>
         </div>
 
         <div style="max-width: 800px;">
@@ -233,7 +233,7 @@
 
     <!-- Scripts -->
     <script src="/config.js"></script>
-    <script src="/js/velma-core.js"></script>
+    <script src="/js/cheryl-core.js"></script>
     <script>
         // Load settings on page load
         document.addEventListener('DOMContentLoaded', () => {
@@ -248,11 +248,11 @@
             const companyAbn = document.getElementById('companyAbn').value.trim();
             const ndisProvider = document.getElementById('ndisProvider').value.trim();
 
-            localStorage.setItem('velma_company_name', companyName);
-            localStorage.setItem('velma_company_abn', companyAbn);
-            localStorage.setItem('velma_ndis_provider', ndisProvider);
+            localStorage.setItem('cheryl_company_name', companyName);
+            localStorage.setItem('cheryl_company_abn', companyAbn);
+            localStorage.setItem('cheryl_ndis_provider', ndisProvider);
 
-            VelmaToast.success('Company information saved');
+            CherylToast.success('Company information saved');
         });
 
         // Clear all data
@@ -261,7 +261,7 @@
                 if (confirm('This action cannot be undone. Continue?')) {
                     localStorage.clear();
                     sessionStorage.clear();
-                    VelmaToast.success('All data cleared');
+                    CherylToast.success('All data cleared');
                     setTimeout(() => window.location.reload(), 1000);
                 }
             }
@@ -269,9 +269,9 @@
 
         // Load settings from localStorage
         function loadSettings() {
-            const companyName = localStorage.getItem('velma_company_name');
-            const companyAbn = localStorage.getItem('velma_company_abn');
-            const ndisProvider = localStorage.getItem('velma_ndis_provider');
+            const companyName = localStorage.getItem('cheryl_company_name');
+            const companyAbn = localStorage.getItem('cheryl_company_abn');
+            const ndisProvider = localStorage.getItem('cheryl_ndis_provider');
 
             if (companyName) {
                 document.getElementById('companyName').value = companyName;

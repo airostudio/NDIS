@@ -1,5 +1,5 @@
 /**
- * Vercel Serverless Function - Chat with Velma
+ * Vercel Serverless Function - Chat with Cheryl
  *
  * This function handles chat requests and calls the Anthropic API
  * using the API key stored in Vercel environment variables.
@@ -54,8 +54,8 @@ export default async function handler(req, res) {
     // Build messages array (history + new message)
     const messages = [...history, { role: 'user', content: message }];
 
-    // System prompt for Velma - NDIS specialized assistant
-    const systemPrompt = `You are Velma, an AI assistant specialized in NDIS (National Disability Insurance Scheme) compliance, payroll, and operations in Australia.
+    // System prompt for Cheryl - NDIS specialized assistant
+    const systemPrompt = `You are Cheryl, an AI assistant specialized in NDIS (National Disability Insurance Scheme) compliance, payroll, and operations in Australia.
 
 You help with:
 - SCHADS Award rates and calculations

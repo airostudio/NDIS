@@ -1,9 +1,9 @@
 /**
- * Velma Chat Interface
- * Handles chat interactions with Velma AI
+ * Cheryl Chat Interface
+ * Handles chat interactions with Cheryl AI
  */
 
-class VelmaChat {
+class CherylChat {
     constructor() {
         this.messagesContainer = document.getElementById('chatMessages');
         this.chatInput = document.getElementById('chatInput');
@@ -152,7 +152,7 @@ class VelmaChat {
 
         try {
             // Send to API
-            const response = await VelmaAPI.chat(message);
+            const response = await CherylAPI.chat(message);
 
             // Remove typing indicator
             this.hideTypingIndicator();
@@ -172,7 +172,7 @@ class VelmaChat {
                 { status: 'error' }
             );
 
-            VelmaToast.error('Failed to send message. Please try again.');
+            CherylToast.error('Failed to send message. Please try again.');
         }
     }
 
@@ -181,10 +181,10 @@ class VelmaChat {
         messageDiv.className = `chat-message ${sender}`;
 
         const avatar = sender === 'user' ? 'U' : 'V';
-        const time = VelmaUtils.formatTime(new Date());
+        const time = CherylUtils.formatTime(new Date());
 
         // Parse markdown-like formatting
-        const formattedText = VelmaUtils.parseMarkdown(text);
+        const formattedText = CherylUtils.parseMarkdown(text);
 
         messageDiv.innerHTML = `
             <div class="chat-message-avatar">${avatar}</div>
@@ -251,7 +251,7 @@ class VelmaChat {
     }
 
     clearChat() {
-        VelmaModal.show(
+        CherylModal.show(
             'Clear Conversation',
             '<p>Are you sure you want to clear the conversation? This action cannot be undone.</p>',
             [
@@ -275,14 +275,14 @@ class VelmaChat {
 
                         // Clear history
                         this.messageHistory = [];
-                        sessionStorage.removeItem('velma_chat_history');
+                        sessionStorage.removeItem('cheryl_chat_history');
 
                         // Show suggested prompts
                         if (this.suggestedPrompts) {
                             this.suggestedPrompts.style.display = 'block';
                         }
 
-                        VelmaToast.success('Conversation cleared');
+                        CherylToast.success('Conversation cleared');
                     }
                 }
             ]
@@ -291,7 +291,7 @@ class VelmaChat {
 
     saveChatHistory() {
         try {
-            sessionStorage.setItem('velma_chat_history', JSON.stringify(this.messageHistory));
+            sessionStorage.setItem('cheryl_chat_history', JSON.stringify(this.messageHistory));
         } catch (error) {
             console.error('Failed to save chat history:', error);
         }
@@ -299,7 +299,7 @@ class VelmaChat {
 
     loadChatHistory() {
         try {
-            const saved = sessionStorage.getItem('velma_chat_history');
+            const saved = sessionStorage.getItem('cheryl_chat_history');
             if (saved) {
                 this.messageHistory = JSON.parse(saved);
 
@@ -325,8 +325,8 @@ class VelmaChat {
         messageDiv.className = `chat-message ${msg.sender}`;
 
         const avatar = msg.sender === 'user' ? 'U' : 'V';
-        const time = VelmaUtils.formatTime(new Date(msg.timestamp));
-        const formattedText = VelmaUtils.parseMarkdown(msg.text);
+        const time = CherylUtils.formatTime(new Date(msg.timestamp));
+        const formattedText = CherylUtils.parseMarkdown(msg.text);
 
         messageDiv.innerHTML = `
             <div class="chat-message-avatar">${avatar}</div>
@@ -344,5 +344,5 @@ class VelmaChat {
 
 // Initialize chat when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    window.velmaChat = new VelmaChat();
+    window.cherylChat = new CherylChat();
 });

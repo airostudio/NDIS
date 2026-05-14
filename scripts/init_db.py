@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Initialize Velma database
+Initialize Cheryl database
 Creates all tables and optionally loads sample data
 """
 
@@ -11,8 +11,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from sqlalchemy import create_engine
-from velma.database.models import Base
-from velma.utils import Config, get_logger
+from cheryl.database.models import Base
+from cheryl.utils import Config, get_logger
 
 logger = get_logger(__name__)
 
@@ -57,7 +57,7 @@ def init_database(database_url: str = None, sample_data: bool = False):
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Initialize Velma database")
+    parser = argparse.ArgumentParser(description="Initialize Cheryl database")
     parser.add_argument("--sample-data", action="store_true", help="Load sample data")
     parser.add_argument("--database-url", help="Database URL (overrides config)")
 

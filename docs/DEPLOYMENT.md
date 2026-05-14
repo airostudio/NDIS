@@ -1,6 +1,6 @@
-## Velma Deployment Guide
+## Cheryl Deployment Guide
 
-This guide covers deploying Velma in a production environment.
+This guide covers deploying Cheryl in a production environment.
 
 ## Prerequisites
 
@@ -23,9 +23,9 @@ sudo apt update && sudo apt upgrade -y
 # Install dependencies
 sudo apt install -y python3.9 python3.9-venv python3-pip postgresql redis-server nginx
 
-# Create velma user
-sudo useradd -m -s /bin/bash velma
-sudo usermod -aG sudo velma
+# Create cheryl user
+sudo useradd -m -s /bin/bash cheryl
+sudo usermod -aG sudo cheryl
 ```
 
 ### 2. Database Setup
@@ -35,21 +35,21 @@ sudo usermod -aG sudo velma
 sudo -u postgres psql
 
 # Create database and user
-CREATE DATABASE velma_production;
-CREATE USER velma_user WITH ENCRYPTED PASSWORD 'secure_password_here';
-GRANT ALL PRIVILEGES ON DATABASE velma_production TO velma_user;
+CREATE DATABASE cheryl_production;
+CREATE USER cheryl_user WITH ENCRYPTED PASSWORD 'secure_password_here';
+GRANT ALL PRIVILEGES ON DATABASE cheryl_production TO cheryl_user;
 \q
 ```
 
 ### 3. Application Deployment
 
 ```bash
-# Switch to velma user
-sudo su - velma
+# Switch to cheryl user
+sudo su - cheryl
 
 # Clone repository
-git clone <your-repo-url> /home/velma/velma
-cd /home/velma/velma
+git clone <your-repo-url> /home/cheryl/cheryl
+cd /home/cheryl/cheryl
 
 # Create virtual environment
 python3.9 -m venv venv
@@ -73,7 +73,7 @@ Production `.env` file:
 ANTHROPIC_API_KEY=your_production_api_key
 
 # Database
-DATABASE_URL=postgresql://velma_user:secure_password@localhost/velma_production
+DATABASE_URL=postgresql://cheryl_user:secure_password@localhost/cheryl_production
 
 # Redis
 REDIS_URL=redis://localhost:6379/0
@@ -84,7 +84,7 @@ ENCRYPTION_KEY=generate_random_encryption_key_here
 
 # Email (SendGrid)
 SENDGRID_API_KEY=your_sendgrid_key
-FROM_EMAIL=velma@yourcompany.com.au
+FROM_EMAIL=cheryl@yourcompany.com.au
 
 # SMS (Twilio)
 TWILIO_ACCOUNT_SID=your_twilio_sid
@@ -118,20 +118,20 @@ python scripts/init_db.py
 
 ### 6. Systemd Service
 
-Create `/etc/systemd/system/velma.service`:
+Create `/etc/systemd/system/cheryl.service`:
 
 ```ini
 [Unit]
-Description=Velma NDIS AI Assistant
+Description=Cheryl NDIS AI Assistant
 After=network.target postgresql.service redis.service
 
 [Service]
 Type=notify
-User=velma
-Group=velma
-WorkingDirectory=/home/velma/velma
-Environment="PATH=/home/velma/velma/venv/bin"
-ExecStart=/home/velma/velma/venv/bin/python scripts/run_api.py
+User=cheryl
+Group=cheryl
+WorkingDirectory=/home/cheryl/cheryl
+Environment="PATH=/home/cheryl/cheryl/venv/bin"
+ExecStart=/home/cheryl/cheryl/venv/bin/python scripts/run_api.py
 Restart=always
 RestartSec=10
 
@@ -143,19 +143,19 @@ Enable and start:
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable velma
-sudo systemctl start velma
-sudo systemctl status velma
+sudo systemctl enable cheryl
+sudo systemctl start cheryl
+sudo systemctl status cheryl
 ```
 
 ### 7. Nginx Configuration
 
-Create `/etc/nginx/sites-available/velma`:
+Create `/etc/nginx/sites-available/cheryl`:
 
 ```nginx
 server {
     listen 80;
-    server_name velma.yourcompany.com.au;
+    server_name cheryl.yourcompany.com.au;
 
     # Redirect to HTTPS
     return 301 https://$server_name$request_uri;
@@ -163,10 +163,10 @@ server {
 
 server {
     listen 443 ssl http2;
-    server_name velma.yourcompany.com.au;
+    server_name cheryl.yourcompany.com.au;
 
-    ssl_certificate /etc/letsencrypt/live/velma.yourcompany.com.au/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/velma.yourcompany.com.au/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/cheryl.yourcompany.com.au/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/cheryl.yourcompany.com.au/privkey.pem;
 
     # Security headers
     add_header Strict-Transport-Security "max-age=31536000" always;
@@ -191,7 +191,7 @@ server {
 Enable site:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/velma /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/cheryl /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -200,7 +200,7 @@ sudo systemctl reload nginx
 
 ```bash
 sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d velma.yourcompany.com.au
+sudo certbot --nginx -d cheryl.yourcompany.com.au
 ```
 
 ## Security Hardening
@@ -240,8 +240,8 @@ sudo systemctl restart postgresql
 ### 1. Application Logs
 
 ```bash
-# View Velma logs
-sudo journalctl -u velma -f
+# View Cheryl logs
+sudo journalctl -u cheryl -f
 
 # View Nginx logs
 sudo tail -f /var/log/nginx/access.log
@@ -259,21 +259,21 @@ Consider setting up:
 
 ### Database Backup
 
-Create `/home/velma/backup.sh`:
+Create `/home/cheryl/backup.sh`:
 
 ```bash
 #!/bin/bash
-BACKUP_DIR="/home/velma/backups"
+BACKUP_DIR="/home/cheryl/backups"
 DATE=$(date +%Y%m%d_%H%M%S)
 
 # Create backup
-pg_dump velma_production > "$BACKUP_DIR/velma_$DATE.sql"
+pg_dump cheryl_production > "$BACKUP_DIR/cheryl_$DATE.sql"
 
 # Compress
-gzip "$BACKUP_DIR/velma_$DATE.sql"
+gzip "$BACKUP_DIR/cheryl_$DATE.sql"
 
 # Delete backups older than 30 days
-find $BACKUP_DIR -name "velma_*.sql.gz" -mtime +30 -delete
+find $BACKUP_DIR -name "cheryl_*.sql.gz" -mtime +30 -delete
 ```
 
 Add to crontab:
@@ -282,7 +282,7 @@ Add to crontab:
 crontab -e
 
 # Daily backup at 2 AM
-0 2 * * * /home/velma/backup.sh
+0 2 * * * /home/cheryl/backup.sh
 ```
 
 ## Updates and Maintenance
@@ -290,11 +290,11 @@ crontab -e
 ### Application Updates
 
 ```bash
-cd /home/velma/velma
+cd /home/cheryl/cheryl
 git pull
 source venv/bin/activate
 pip install -r requirements.txt
-sudo systemctl restart velma
+sudo systemctl restart cheryl
 ```
 
 ### Database Migrations
@@ -303,7 +303,7 @@ When schema changes occur:
 
 ```bash
 # Backup first!
-/home/velma/backup.sh
+/home/cheryl/backup.sh
 
 # Run migrations
 python scripts/migrate_db.py
@@ -316,7 +316,7 @@ python scripts/migrate_db.py
 For high traffic:
 
 1. **Load Balancer**: Use Nginx or HAProxy
-2. **Multiple Workers**: Run multiple Velma instances
+2. **Multiple Workers**: Run multiple Cheryl instances
 3. **Redis Session Store**: Share sessions across instances
 4. **Database Replication**: PostgreSQL read replicas
 
@@ -343,7 +343,7 @@ Recommended specs by usage:
 
 **Service won't start:**
 ```bash
-sudo journalctl -u velma -n 50 --no-pager
+sudo journalctl -u cheryl -n 50 --no-pager
 ```
 
 **Database connection issues:**
@@ -353,7 +353,7 @@ sudo -u postgres psql -c "SELECT 1"
 
 **High memory usage:**
 ```bash
-sudo systemctl restart velma
+sudo systemctl restart cheryl
 ```
 
 ## Compliance Considerations

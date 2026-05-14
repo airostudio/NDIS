@@ -1,0 +1,178 @@
+cheryl:
+  name: "Cheryl"
+  version: "1.0.0"
+  description: "NDIS Virtual AI Executive Suite"
+
+  # AI Configuration
+  ai:
+    provider: "anthropic"
+    model: "claude-sonnet-4-5-20250929"
+    temperature: 0.7
+    max_tokens: 4096
+    streaming: true
+
+  # Module Configuration
+  modules:
+    calendar:
+      enabled: true
+      default_meeting_duration: 30  # minutes
+      reminder_times: [24, 1, 0.25]  # hours before meeting
+      auto_schedule: true
+      conflict_resolution: "interactive"  # auto, interactive, manual
+
+    communication:
+      enabled: true
+      email:
+        check_interval: 300  # seconds
+        priority_keywords: ["urgent", "asap", "emergency", "critical"]
+        auto_reply_enabled: true
+        signature: "Best regards,\nCheryl\nVirtual Assistant"
+      spam_filtering: true
+      sentiment_analysis: true
+
+    receptionist:
+      enabled: true
+      greeting: "Thank you for calling {company_name}. This is Cheryl, how may I help you today?"
+      call_routing:
+        max_wait_time: 300  # seconds
+        overflow_action: "voicemail"  # voicemail, callback, queue
+      visitor:
+        badge_required: true
+        photo_capture: false
+
+    hr:
+      enabled: true
+      ndis_compliance:
+        worker_screening_expiry_warning: 30  # days before expiry
+        wwcc_expiry_warning: 30
+        first_aid_expiry_warning: 60
+        auto_reminder_frequency: 7  # days
+      onboarding:
+        checklist_enabled: true
+        auto_document_request: true
+      incident_reporting:
+        auto_notify_manager: true
+        escalation_threshold: "high"  # low, medium, high
+
+    payroll:
+      enabled: true
+      schads_award:
+        version: "2026"
+        auto_calculate: true
+        penalty_rates:
+          afternoon: 1.15  # 3pm-8pm weekday
+          night: 1.25      # 8pm-7am weekday
+          evening: 1.5     # After 6pm weekday
+          saturday: 1.5
+          sunday: 1.75
+          public_holiday: 2.5
+        allowances:
+          sleepover: 62.45  # per night
+          broken_shift: 4.85  # per occurrence
+          meal: 18.35  # per shift over 5 hours
+          km_rate: 0.85  # per km
+      stp:
+        enabled: true
+        auto_submit: false  # Requires manual approval
+        phase: 2
+      superannuation:
+        rate: 0.115  # 11.5% for 2026
+        threshold: 450  # monthly threshold
+
+    tasks:
+      enabled: true
+      auto_create_followups: true
+      deadline_reminders: [7, 3, 1, 0]  # days before deadline
+      priority_levels: ["low", "medium", "high", "critical"]
+
+    relationships:
+      enabled: true
+      contact_enrichment: true
+      birthday_reminders: true
+      anniversary_reminders: true
+      networking_suggestions: true
+
+  # Integration Configuration
+  integrations:
+    calendar_provider: "google"  # google, microsoft, exchange
+    email_provider: "google"     # google, microsoft, exchange
+    crm_provider: null           # salesforce, hubspot, custom
+    payroll_provider: "employment_hero"  # employment_hero, xero, myob
+
+  # Interface Configuration
+  interfaces:
+    api:
+      enabled: true
+      rate_limit: 100  # requests per minute
+      authentication: "jwt"
+    chat:
+      enabled: true
+      platforms: ["web", "telegram", "slack"]
+    voice:
+      enabled: true
+      provider: "twilio"
+      voice: "alice"
+      language: "en-AU"
+    sms:
+      enabled: true
+      provider: "twilio"
+    email:
+      enabled: true
+      provider: "sendgrid"
+
+  # Security Configuration
+  security:
+    encryption_enabled: true
+    audit_logging: true
+    session_timeout: 3600  # seconds
+    mfa_required: false
+    ip_whitelist: []
+
+  # Routing and Escalation
+  routing:
+    business_hours:
+      timezone: "Australia/Sydney"
+      monday: ["09:00", "17:00"]
+      tuesday: ["09:00", "17:00"]
+      wednesday: ["09:00", "17:00"]
+      thursday: ["09:00", "17:00"]
+      friday: ["09:00", "17:00"]
+      saturday: null
+      sunday: null
+    escalation:
+      after_hours_contact: "emergency@company.com.au"
+      priority_contact: "manager@company.com.au"
+      technical_contact: "it@company.com.au"
+      hr_contact: "hr@company.com.au"
+    auto_escalate:
+      keywords: ["emergency", "crisis", "urgent help", "immediate"]
+      sentiment_threshold: -0.7  # Escalate very negative sentiment
+
+  # Proactive Assistance
+  proactive:
+    enabled: true
+    morning_briefing: "08:30"
+    end_of_day_summary: "16:30"
+    weekly_report: "monday 09:00"
+    suggestions:
+      calendar_optimization: true
+      task_prioritization: true
+      deadline_warnings: true
+
+  # Australian/NDIS Specific
+  australian_context:
+    use_australian_english: true
+    public_holidays:
+      source: "australian_public_holidays_api"
+      states: ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT"]
+    ndis:
+      portal_integration: true
+      quality_safeguards_compliance: true
+      practice_standards: true
+
+  # Logging
+  logging:
+    level: "INFO"
+    format: "json"
+    retention_days: 365
+    sensitive_data_masking: true
